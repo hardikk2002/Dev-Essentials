@@ -1,0 +1,20 @@
+{
+  "name": "Dev Essentials",
+  "description": "Productivity tool for developers",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "./obj-16x16.png",
+    "32": "./obj-32x32.png",
+    "48": "./obj-48x48.png",
+    "128": "./obj-128x128.png"
+  },
+  "background": {
+    "scripts": ["./background.js"]
+  },
+  "options_page": "./options.html",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["tabs", "<all_urls>"]
+}
