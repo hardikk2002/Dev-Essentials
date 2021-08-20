@@ -18,7 +18,7 @@ function Popup() {
             </div>
           </div>
           <div style={styles.info}>
-            <h1 style={styles.title}>Blog Space 🤓😍</h1>
+            <h1 style={styles.title}>Blog Space 😍</h1>
           </div>
         </div>
 
@@ -29,7 +29,7 @@ function Popup() {
             </div>
           </div>
           <div style={styles.info}>
-            <h1 style={styles.title}>Task List 🎯😎</h1>
+            <h1 style={styles.title}>Task List 🎯</h1>
           </div>
         </div>
         <div style={styles.optionItem}>
@@ -49,7 +49,7 @@ function Popup() {
             </div>
           </div>
           <div style={styles.info}>
-            <h1 style={styles.title}>News Lab 🌈🌤</h1>
+            <h1 style={styles.title}>News Lab 🌈</h1>
           </div>
         </div>
         <div style={styles.optionItem}>
@@ -59,17 +59,21 @@ function Popup() {
             </div>
           </div>
           <div style={styles.info}>
-            <h1 style={styles.title}>Music & Chill 😌🎧</h1>
+            <h1 style={styles.title}>Music & Chill 🎧</h1>
           </div>
         </div>
       </div>
       <div style={styles.footer}>
         <div style={styles.info}>
           <div>
-            <h1 style={styles.title}>Login? 🥳🌟</h1>
-          </div>
-          <div style={{ cursor: "pointer" }}>
-            <SettingsIcon />
+            <h1 style={styles.title}>
+              Login?{" "}
+              <span style={{ cursor: "pointer" }}>
+                {" "}
+                🥳
+                <SettingsIcon />
+              </span>{" "}
+            </h1>
           </div>
         </div>
       </div>
