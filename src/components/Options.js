@@ -7,43 +7,42 @@ import {
     Redirect
 } from "react-router-dom";
 
-import Popup from './Popup.js';
-import Foreground from './Foreground.js';
+import Popup from "./Popup.js";
 
 function Options() {
-    return (
-        <Router>
-            <div style={styles.container}>
-                <div style={styles.nav_bar}>
-                    <h1>Chrome Ext - Options</h1>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link to="/">Options</Link>
-                            </li>
-                            <li>
-                                <Link to="/popup">Popup</Link>
-                            </li>
-                            <li>
-                                <Link to="/foreground">Foreground</Link>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <Switch>
-                    <Route exact path="/popup">
-                        <Popup />
-                    </Route>
-                    <Route exact path="/foreground">
-                        <Foreground />
-                    </Route>
-                    <Route exact path="/">
-                        <Redirect to="/options.html" />
-                    </Route>
-                </Switch>
-            </div>
-        </Router>
-    )
+  return (
+    <Router>
+      <div style={styles.container}>
+        <div style={styles.nav_bar}>
+          <h1>Chrome Ext - Options</h1>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Options</Link>
+              </li>
+              <li>
+                <Link to="/popup">Popup</Link>
+              </li>
+              {/* <li>
+                <Link to="/blogs">blogs</Link>
+              </li> */}
+            </ul>
+          </nav>
+        </div>
+        <Switch>
+          <Route exact path="/popup">
+            <Popup />
+          </Route>
+          {/* <Route exact path="/blogs">
+            <blogs />
+          </Route> */}
+          <Route exact path="/">
+            <Redirect to="/options.html" />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
 }
 
 const styles = {
