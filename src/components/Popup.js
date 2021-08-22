@@ -114,10 +114,11 @@ const styles = {
     boxSizing: "border-box",
   },
   headerTitle: {
-    fontSize: 35,
+    fontSize: 30,
     color: "#252429",
-    fontWeight: 700,
+    fontWeight: 400,
     margin: "5% auto",
+    padding: "1%",
     textAlign: "center",
     fontFamily: "'Open Sans', sans-serif",
     transform: "skew(-12deg)",
@@ -130,7 +131,8 @@ const styles = {
     height: "73%",
   },
   optionItem: {
-    background: "#e0e6edcc",
+    background: "rgba(248,252,251,.582)",
+    boxShadow: "2px 2px 1px #e0e6edcc",
     width: "85%",
     height: "50px",
     padding: "2%",
@@ -171,10 +173,9 @@ const styles = {
     fontFamily: "'Rubik', sans-serif",
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     color: "#252429",
     fontWeight: 500,
-    TextDecoration: "none",
     fontFamily: "'Rubik', sans-serif",
   },
   para: {
@@ -182,9 +183,11 @@ const styles = {
     fontWeight: 400,
   },
   footer: {
+    fontWeight: 300,
+    fontSize: 9,
+    fontFamily: "'Rubik', sans-serif",
     textAlign: "center",
     marginTop: "-3%",
-    fontSize: 13,
   },
 };
 
