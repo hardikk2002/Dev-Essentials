@@ -8,6 +8,11 @@ module.exports = {
     contentBase: path.resolve(__dirname, "./src"),
     historyApiFallback: true,
   },
+  performance: {
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+    hints: false,
+  },
   entry: {
     popup: path.resolve(__dirname, "./src/entry/index-popup.js"),
     options: path.resolve(__dirname, "./src/entry/index-options.js"),

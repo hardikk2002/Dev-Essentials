@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "regenerator-runtime/runtime.js";
-import { ThreeDots } from "svg-loaders-react";
 
 const query = `{
     storiesFeed(type:BEST)
@@ -28,7 +27,7 @@ function Blogs() {
 
   const [hashnodePosts, setHashnodePosts] = useState([]);
   const [devtoPosts, setDevtoPosts] = useState([]);
-  const [githubPosts, setGithubPosts] = useState([]);
+  const [githubRepo, setGithubRepo] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
@@ -75,17 +74,21 @@ function Blogs() {
   }
 
   async function githubFetcher() {
+    setLoading(true);
     setHashnode(false);
     setDevto(false);
     setGithub(true);
-
-    const response = await fetch(
-      "https://gtrend.yapie.me/repositories?since=daily"
-    );
-    const trendingRepos = await response.json();
-    console.log(trendingRepos);
-
-    setGithubPosts(trendingRepos);
+    try {
+      const response = await fetch(
+        "https://gtrend.yapie.me/repositories?since=daily"
+      );
+      const trendingRepos = await response.json();
+      // console.log(trendingRepos);
+      setLoading(false);
+      setGithubRepo(trendingRepos);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -118,8 +121,8 @@ function Blogs() {
         {hashnode ? (
           <>
             {loading === true ? (
-              <div style={{ margin: "35%" }}>
-                <ThreeDots fill="#6366F1" />
+              <div>
+                <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
               </div>
             ) : (
               <div style={styles.postOuterContainer}>
@@ -140,7 +143,7 @@ function Blogs() {
                           style={styles.postImage}
                           src={
                             post.coverImage === ""
-                              ? "https://picsum.photos/seed/picsum/200/150"
+                              ? "https://cdn.hashnode.com/res/hashnode/image/upload/v1611902473383/CDyAuTy75.png?auto=compress"
                               : post.coverImage
                           }
                           alt="cover-img"
@@ -165,8 +168,8 @@ function Blogs() {
             {devto ? (
               <>
                 {loading === true ? (
-                  <div style={{ margin: "35%" }}>
-                    <ThreeDots fill="#6366F1" />
+                  <div>
+                    <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
                   </div>
                 ) : (
                   <div style={styles.postOuterContainer}>
@@ -183,7 +186,7 @@ function Blogs() {
                               style={styles.postImage}
                               src={
                                 post.social_image === ""
-                                  ? "https://picsum.photos/seed/picsum/200/150"
+                                  ? "https://res.cloudinary.com/practicaldev/image/fetch/s--R9qwOwpC--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/78hs31fax49uwy6kbxyw.png"
                                   : post.social_image
                               }
                               alt="cover-img"
@@ -208,59 +211,45 @@ function Blogs() {
               <>
                 {github ? (
                   <>
-                    {" "}
-                    <div style={styles.postsContainer}>
-                      {githubPosts.map((repo) => {
-                        return (
-                          <div>
-                            <a
-                              style={styles.postsContainer}
-                              href={repo.url}
-                              target="-blank"
-                              rel="noreffer"
-                            >
-                              <h3 className="text-xl font-semibold text-blue-500">
-                                {repo.name}
-                              </h3>
-                              <span className="text-md">
-                                {repo.description}
-                              </span>
+                    {loading === true ? (
+                      <div>
+                        <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
+                      </div>
+                    ) : (
+                      <div style={styles.postOuterContainer}>
+                        {githubRepo.map((repo) => {
+                          return (
+                            <div>
+                              <a
+                                style={styles.postsContainer}
+                                href={repo.url}
+                                target="_blank"
+                                rel="noreffer"
+                              >
+                                <div style={styles.postContentGithub}>
+                                  <h3 style={styles.postTitleGithub}>
+                                    {repo.name}
+                                  </h3>
+                                  <p style={styles.postInfoGithub}>
+                                    {repo.description}
+                                  </p>
 
-                              <div className="flex flex-row my-2">
-                                <div className="flex mr-2 text-sm">
-                                  <div
-                                    className="m-1 h-4 w-4 rounded-full"
-                                    style={{
-                                      backgroundColor: `${repo.languageColor}`,
-                                    }}
-                                  ></div>
-                                  <span className="m-1">{repo.language}</span>
+                                  <p style={styles.postInfoGithub}>
+                                    👨‍💻 {repo.language}
+                                  </p>
                                 </div>
-                                {/* <div className="flex mr-2">
-                                    <img
-                                      src={starIcon}
-                                      alt="star"
-                                      className="m-1 h-4 w-4"
-                                    />
-                                    <span>{repo.stars}</span>
-                                  </div>
-                                  <div className="flex mr-2">
-                                    <img
-                                      src={forkIcon}
-                                      alt="fork"
-                                      className="m-1 h-4 w-4"
-                                    />
-                                    <span className="mx-2">{repo.forks}</span>
-                                  </div> */}
-                              </div>
-                            </a>
-                          </div>
-                        );
-                      })}
-                    </div>
+                              </a>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </>
                 ) : (
-                  "Nothing to show!"
+                  <>
+                    <h3>Get top Posts from your Favourite ❤️ Platforms!</h3>
+                    <p>Hashnode.com | Dev.to | Github.com</p>
+                  </>
                 )}
               </>
             )}
@@ -332,6 +321,23 @@ const styles = {
     display: "flex",
     alignItems: "center",
     marginBottom: "2%",
+  },
+  postContentGithub: {
+    width: "95%",
+    padding: "2%",
+    height: "auto",
+    background: "rgba(248,252,251,.582)",
+    boxShadow: "2px 2px 1px #e0e6edcc",
+    borderRadius: "7px",
+  },
+  postTitleGithub: {
+    color: "#252429",
+    fontWeight: 600,
+    fontFamily: "'Rubik', sans-serif",
+  },
+  postInfoGithub: {
+    color: "#252429",
+    fontFamily: "'Rubik', sans-serif",
   },
   postImage: {
     width: "30%",

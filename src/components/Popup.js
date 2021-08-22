@@ -169,7 +169,6 @@ const styles = {
     width: "80%",
     lineHeight: "5px",
     margin: "auto 0",
-    // border: "1px solid orange",
     fontFamily: "'Rubik', sans-serif",
   },
   title: {
