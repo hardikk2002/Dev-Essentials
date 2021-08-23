@@ -38,7 +38,7 @@ function Todo() {
       isCompleted: false,
     },
     {
-      text: "Start my bloging carrier 🔥",
+      text: "Start my bloging career 🔥",
       isCompleted: false,
     },
   ]);
@@ -59,10 +59,7 @@ function Todo() {
         {tasks.map((task, index) => (
           <div style={styles.todoContent}>
             <span>{task.text}</span>
-            <button
-              style={styles.todoIconDel}
-              onClick={() => removeTask(index)}
-            >
+            <button style={styles.todoIcon} onClick={() => removeTask(index)}>
               <DeleteIcon style={{ fontSize: "1.2rem" }} />
             </button>
           </div>
@@ -115,19 +112,12 @@ const styles = {
     background: "#aaaaaac4",
     border: "none",
     color: "#ffff",
-    margin: "1% 0 0 1%",
-    borderRadius: "7px",
-    cursor: "pointer",
-  },
-  todoIconDel: {
-    background: "#aaaaaac4",
     padding: "1%",
-    border: "none",
-    color: "#ffff",
     margin: "1% 0 0 1%",
     borderRadius: "7px",
     cursor: "pointer",
   },
+
   todoContent: {
     width: "80%",
     height: "auto",
@@ -140,7 +130,7 @@ const styles = {
     boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
     display: "flex",
-    alignItems: "center",
+    textAlign: "left",
     justifyContent: "space-between",
   },
 };
