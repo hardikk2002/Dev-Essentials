@@ -126,9 +126,10 @@ function Blogs() {
               </div>
             ) : (
               <div style={styles.postOuterContainer}>
-                {hashnodePosts.map((post) => {
+                {hashnodePosts.map((post, index) => {
                   return (
                     <a
+                      key={index}
                       style={styles.postsContainer}
                       href={`https://${
                         post.author.publicationDomain === ""
@@ -173,9 +174,10 @@ function Blogs() {
                   </div>
                 ) : (
                   <div style={styles.postOuterContainer}>
-                    {devtoPosts.map((post) => {
+                    {devtoPosts.map((post, index) => {
                       return (
                         <a
+                          key={index}
                           style={styles.postsContainer}
                           href={post.url}
                           target="_blank"
@@ -217,10 +219,11 @@ function Blogs() {
                       </div>
                     ) : (
                       <div style={styles.postOuterContainer}>
-                        {githubRepo.map((repo) => {
+                        {githubRepo.map((repo, index) => {
                           return (
                             <div>
                               <a
+                                key={index}
                                 style={styles.postsContainer}
                                 href={repo.url}
                                 target="_blank"
