@@ -340,6 +340,7 @@ const styles = {
   },
   postInfoGithub: {
     color: "#252429",
+    fontSize: 15,
     fontFamily: "'Rubik', sans-serif",
   },
   postImage: {
