@@ -14,12 +14,13 @@ const AddTaskForm = ({ addTask }) => {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        style={styles.taskInput}
         type="text"
         value={value}
         placeholder="Enter a title for this task…"
         onChange={(e) => setValue(e.target.value)}
       />
-      <button type="submit">
+      <button type="submit" style={styles.todoIcon}>
         <AddIcon />
       </button>
     </form>
@@ -29,26 +30,20 @@ const AddTaskForm = ({ addTask }) => {
 function Todo() {
   const [tasks, setTasks] = useState([
     {
-      text: "Star this Project on Github",
+      text: "Star this Project on Github 🌟",
       isCompleted: false,
     },
     {
-      text: "Will contribute to open source",
+      text: "Will contribute to open source 😋",
       isCompleted: false,
     },
     {
-      text: "Start my bloging carrier",
+      text: "Start my bloging carrier 🔥",
       isCompleted: false,
     },
   ]);
 
   const addTask = (text) => setTasks([...tasks, { text }]);
-
-  const toggleTask = (index) => {
-    const newTasks = [...tasks];
-    newTasks[index].isCompleted = !newTasks[index].isCompleted;
-    setTasks(newTasks);
-  };
 
   const removeTask = (index) => {
     const newTasks = [...tasks];
@@ -62,17 +57,13 @@ function Todo() {
       <div style={styles.todoContainer}>
         <AddTaskForm addTask={addTask} />
         {tasks.map((task, index) => (
-          <div className="todo">
-            <span
-              onClick={() => toggleTask(index)}
-              className={
-                task.isCompleted ? "todo-text todo-completed" : "todo-text"
-              }
+          <div style={styles.todoContent}>
+            <span>{task.text}</span>
+            <button
+              style={styles.todoIconDel}
+              onClick={() => removeTask(index)}
             >
-              {task.text}
-            </span>
-            <button onClick={() => removeTask(index)}>
-              <DeleteIcon />
+              <DeleteIcon style={{ fontSize: "1.2rem" }} />
             </button>
           </div>
         ))}
@@ -103,9 +94,53 @@ const styles = {
   },
   todoContainer: {
     overflow: "auto",
-    height: "73%",
+    height: "85%",
     textAlign: "center",
-    padding: "4%",
+    margin: "5% 3%",
+    borderRadius: "7px",
+  },
+  taskInput: {
+    height: "40px",
+    padding: " 0 10px",
+    width: "60%",
+    outline: "none",
+    background: "#ffff",
+    color: "#252429",
+    fontWeight: 600,
+    fontFamily: "'Rubik', sans-serif",
+    border: "3px solid #33d6a6",
+    borderRadius: "28px",
+  },
+  todoIcon: {
+    background: "#33d6a6",
+    border: "none",
+    color: "#ffff",
+    margin: "1% 0 0 1%",
+    borderRadius: "7px",
+    cursor: "pointer",
+  },
+  todoIconDel: {
+    background: "#ec3750",
+    padding: "1%",
+    border: "none",
+    color: "#ffff",
+    margin: "1% 0 0 1%",
+    borderRadius: "7px",
+    cursor: "pointer",
+  },
+  todoContent: {
+    width: "80%",
+    height: "auto",
+    fontWeight: 600,
+    fontFamily: "'Rubik', sans-serif",
+    margin: "4% auto",
+    padding: "3%",
+    background: "rgba(248,252,251,.582)",
+    boxShadow: "2px 2px 1px #33d6a6",
+    borderRadius: "7px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 };
 
