@@ -7,6 +7,15 @@ const AddTaskForm = ({ addTask }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (value !== "") {
+      var items = localStorage.getItem("todo-items");
+      var itemsArrs = JSON.parse(items);
+      var newItem = { text: `${value}` };
+      itemsArrs.push(newItem);
+      localStorage.setItem("todo-items", JSON.stringify(itemsArrs));
+    }
+    console.log(value);
     value && addTask(value);
     setValue("");
   };
@@ -20,7 +29,7 @@ const AddTaskForm = ({ addTask }) => {
         placeholder="Enter a title for this task…"
         onChange={(e) => setValue(e.target.value)}
       />
-      <button type="submit" style={styles.todoIcon}>
+      <button type="submit" style={styles.todoIconAdd}>
         <AddIcon />
       </button>
     </form>
@@ -28,36 +37,57 @@ const AddTaskForm = ({ addTask }) => {
 };
 
 function Todo() {
-  const [tasks, setTasks] = useState([
-    {
-      text: "Star this Project on Github 🌟",
-      isCompleted: false,
-    },
-    {
-      text: "Will contribute to open source 😋",
-      isCompleted: false,
-    },
-    {
-      text: "Start my bloging career 🔥",
-      isCompleted: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
 
-  const addTask = (text) => setTasks([...tasks, { text }]);
+  const addTask = (text) => {
+    setTasks([]);
+  };
 
   const removeTask = (index) => {
-    const newTasks = [...tasks];
-    newTasks.splice(index, 1);
-    setTasks(newTasks);
+    var itemsArr = JSON.parse(localStorage.getItem("todo-items"));
+    itemsArr.splice(index, 1);
+    localStorage.setItem("todo-items", JSON.stringify(itemsArr));
+
+    setTasks([]);
   };
+
+  function fetchItems() {
+    var items = localStorage.getItem("todo-items");
+
+    if (items === null) {
+      var newItem1 = { text: "Star this Project on Github 🌟" };
+      var newItem2 = {
+        text: "Will contribute to open source 😋",
+      };
+      var newItem3 = {
+        text: "Start my bloging career 🔥",
+      };
+      var itemsArr = [];
+      itemsArr.push(newItem1);
+      itemsArr.push(newItem2);
+      itemsArr.push(newItem3);
+      localStorage.setItem("todo-items", JSON.stringify(itemsArr));
+    }
+
+    var items2 = localStorage.getItem("todo-items");
+    var itemsArr2 = JSON.parse(items2);
+    try {
+      for (var i = 0; i < itemsArr2.length; i++) {
+        tasks.push(itemsArr2[i]);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   return (
     <div style={styles.main}>
       <h1 style={styles.headerTitle}>Make comitments to yourself.🎯 </h1>
       <div style={styles.todoContainer}>
         <AddTaskForm addTask={addTask} />
+        {fetchItems()}
         {tasks.map((task, index) => (
-          <div style={styles.todoContent}>
+          <div style={styles.todoContent} key={index}>
             <span>{task.text}</span>
             <button style={styles.todoIcon} onClick={() => removeTask(index)}>
               <DeleteIcon style={{ fontSize: "1.2rem" }} />
@@ -99,6 +129,7 @@ const styles = {
   taskInput: {
     height: "40px",
     padding: " 0 10px",
+    margin: "auto",
     width: "60%",
     outline: "none",
     background: "#ffff",
@@ -107,6 +138,7 @@ const styles = {
     fontFamily: "'Rubik', sans-serif",
     border: "3px solid #e0e6edcc",
     borderRadius: "28px",
+    display: "flex",
   },
   todoIcon: {
     background: "#aaaaaac4",
@@ -114,8 +146,24 @@ const styles = {
     color: "#ffff",
     padding: "1%",
     margin: "1% 0 0 1%",
-    borderRadius: "7px",
+    borderRadius: "50%",
     cursor: "pointer",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  todoIconAdd: {
+    background: "#aaaaaac4",
+    border: "none",
+    color: "#ffff",
+    padding: "1%",
+    margin: "1% 0 0 1%",
+    borderRadius: "50%",
+    cursor: "pointer",
+    margin: "2% auto",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   todoContent: {
@@ -128,7 +176,7 @@ const styles = {
     padding: "3%",
     background: "rgba(248,252,251,.582)",
     boxShadow: "2px 2px 1px #e0e6edcc",
-    borderRadius: "7px",
+    borderRadius: "11px",
     display: "flex",
     textAlign: "left",
     justifyContent: "space-between",
