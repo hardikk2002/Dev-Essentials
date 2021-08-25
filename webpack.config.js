@@ -18,6 +18,7 @@ module.exports = {
     options: path.resolve(__dirname, "./src/entry/index-options.js"),
     blogs: path.resolve(__dirname, "./src/entry/index-blogs.js"),
     todo: path.resolve(__dirname, "./src/entry/index-todo.js"),
+    contest: path.resolve(__dirname, "./src/entry/index-contest.js"),
   },
   output: {
     filename: "[name].bundle.js",
@@ -70,7 +71,11 @@ module.exports = {
       template: "src/html/todo.html",
       chunks: ["todo"],
     }),
-
+    new HtmlWebpackPlugin({
+      filename: "contest.html",
+      template: "src/html/contest.html",
+      chunks: ["contest"],
+    }),
     new CopyWebpackPlugin({
       patterns: [
         { from: "src/manifest.json", to: "[name].[ext]" },

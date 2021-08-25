@@ -47,7 +47,7 @@ function Blogs() {
       const apiResponse = await response.json();
       setHashnodePosts(apiResponse.data.storiesFeed);
       setLoading(false);
-      console.log(hashnodePosts);
+      // console.log(hashnodePosts);
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +67,7 @@ function Blogs() {
       const apiResponse = await response.json();
       setDevtoPosts(apiResponse);
       setLoading(false);
-      console.log(devtoPosts);
+      // console.log(devtoPosts);
     } catch (error) {
       console.log(error);
     }

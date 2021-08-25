@@ -1,4 +1,4 @@
-const blogs_entry_point = document.createElement("div");
+const popup_entry_point = document.createElement("div");
 let reactJS_script = document.createElement("script");
 
 blogs_entry_point.id = "blogs";

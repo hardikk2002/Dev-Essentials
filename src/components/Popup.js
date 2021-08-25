@@ -16,6 +16,7 @@ import {
 // import Blogs from "./blogs";
 import Blogs from "./Blogs.js";
 import Todo from "./Todo.js";
+import Contest from "./Contest.js";
 
 function Popup() {
   return (
@@ -55,16 +56,16 @@ function Popup() {
               <h1 style={styles.title}> Word of the day! 😋</h1>
             </div>
           </div>
-          <div style={styles.optionItem}>
+          <Link to="contest" style={styles.optionItem}>
             <div style={styles.iconBackground}>
               <div style={{ ...styles.icon, ...styles.news }}>
                 <ChromeReaderModeIcon />
               </div>
             </div>
             <div style={styles.info}>
-              <h1 style={styles.title}>News Lab 🌈</h1>
+              <h1 style={styles.title}>Coding Contests 🌈</h1>
             </div>
-          </div>
+          </Link>
           <div style={styles.optionItem}>
             <div style={styles.iconBackground}>
               <div style={{ ...styles.icon, ...styles.music }}>
@@ -95,6 +96,9 @@ function Popup() {
           </Route>
           <Route exact path="/todo">
             <Todo />
+          </Route>
+          <Route exact path="/contest">
+            <Contest />
           </Route>
           <Route exact path="/">
             <Redirect to="/options.html" />
