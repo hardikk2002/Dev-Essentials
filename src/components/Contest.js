@@ -3,82 +3,73 @@ import "regenerator-runtime/runtime.js";
 const axios = require("axios");
 
 const Contest = () => {
-  const [codechef, setCodechef] = useState(false);
-  const [codeforces, setCodeforces] = useState(false);
-  const [hackerearth, setHackerearth] = useState(false);
-  const [atcoder, setAtcoder] = useState(false);
+  // const [codechef, setCodechef] = useState(false);
+  // const [codeforces, setCodeforces] = useState(false);
+  // const [hackerearth, setHackerearth] = useState(false);
   // const [leetcode, setLeetcode] = useState(false);
   // const [hackerrank, setHackerrank] = useState(false);
+  const [resourceName, setResourceName] = useState({});
+  const [activeList, setActiveList] = useState("");
 
-  const [codechefPosts, setCodechefePosts] = useState([]);
-  const [codeforcesPosts, setCodeforcesPosts] = useState([]);
-  const [hackereartPosts, setHackerearthPosts] = useState([]);
-
-  async function contestListFetcher() {
-    let clientKey =
-      "username=hardikk2002&api_key=acd3004b4db9654e1c74db2a1323ee744c8c9d3c";
+  async function contestListFetcher(resource) {
     try {
-      const response = await fetch(
-        "https://clist.by:443/api/v2/contest/13281548/"
-      );
+      const response = await fetch("http://localhost:5000/contest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ resource: resource }),
+      });
       const apiResponse = await response.json();
-      console.log(apiResponse);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  async function codechefFetcher() {
-    setCodechef(true);
-    setCodeforces(false);
-    setHackerearth(false);
-    setAtcoder(false);
-  }
-  async function codeforcesFetcher() {
-    setCodechef(false);
-    setCodeforces(true);
-    setHackerearth(false);
-    setAtcoder(false);
-
-    try {
-      const response = await fetch(
-        "https://clist.by/api/v2/contest/13281548/?format=json/?username=hardikk2002&api_key=acd3004b4db9654e1c74db2a1323ee744c8c9d3c",
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "http://localhost:8080/contest.html",
-            // "Set-Cookie: cross-site-cookie": "whatever",
-            // SameSite: "None",
-          },
-        }
-      );
-      const apiResponse = await response.json();
-      const contestList = apiResponse.result.filter(
-        (obj) => obj.phase === "BEFORE"
-      );
-      setCodeforcesPosts(contestList);
-      console.log(codeforcesPosts);
+      setResourceName(apiResponse.objects);
+      // console.log(resourceName);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function hackerearthFetcher() {
-    setCodechef(true);
-    setCodeforces(false);
-    setHackerearth(false);
-    setAtcoder(false);
+  function renderList(active) {
+    switch (active) {
+      case "codechef":
+        return;
+
+      case "codeforces":
+        return;
+      case "hackerearth":
+        return;
+      case "codechef":
+        return;
+      case "leetcode":
+        return;
+      case "hackerrank":
+        return;
+      default:
+        return <h1>HIEHEIEHI</h1>;
+    }
   }
+
   return (
     <div style={styles.main}>
       <h1 style={styles.headerTitle}>Coding Contests 🌈</h1>
       <div style={styles.platformDiv}>
-        <div style={styles.platformInnerDiv} onClick={codechefFetcher}>
+        <div
+          style={styles.platformInnerDiv}
+          onClick={() => {
+            contestListFetcher("codechef.com");
+            setActiveList("codechef");
+          }}
+        >
           <img
             style={styles.platformLogo}
             src="https://cdn.codechef.com/sites/all/themes/abessive/cc-logo.svg"
             alt="https://www.codechef.com/"
           />
         </div>
-        <div style={styles.platformInnerDiv} onClick={codeforcesFetcher}>
+        <div
+          style={styles.platformInnerDiv}
+          onClick={() => {
+            contestListFetcher("codeforces.com");
+            setActiveList("codeforces");
+          }}
+        >
           <img
             style={styles.platformLogo}
             src="https://codeforces.org/s/85175/images/codeforces-logo-with-telegram.png"
@@ -88,8 +79,8 @@ const Contest = () => {
         <div
           style={styles.platformInnerDiv}
           onClick={() => {
-            setCodechef(true);
-            contestListFetcher();
+            contestListFetcher("hackerearth.com");
+            setActiveList("hackerearth");
           }}
         >
           <img
@@ -101,8 +92,8 @@ const Contest = () => {
         <div
           style={styles.platformInnerDiv}
           onClick={() => {
-            setCodechef(true);
-            contestListFetcher();
+            contestListFetcher("leetcode.com");
+            setActiveList("leetcode");
           }}
         >
           <img
@@ -114,8 +105,8 @@ const Contest = () => {
         <div
           style={styles.platformInnerDiv}
           onClick={() => {
-            setCodechef(true);
-            contestListFetcher();
+            contestListFetcher("hackerrank.com");
+            setActiveList("hackerrank");
           }}
         >
           <img
@@ -125,7 +116,7 @@ const Contest = () => {
           />
         </div>
       </div>
-      <div style={styles.listOuterContainer}></div>
+      <div style={styles.listOuterContainer}>{renderList({ activeList })}</div>
     </div>
   );
 };
