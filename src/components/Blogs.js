@@ -249,6 +249,22 @@ function Blogs() {
                 ) : (
                   <>
                     <h3>Get top Posts from your Favourite ❤️ Platforms!</h3>
+                    <br />
+
+                    <h3>
+                      <p>Hashnode: Top 10 blog.</p>
+                    </h3>
+
+                    <h3>
+                      <p>Devto: Blog Posts.</p>
+                    </h3>
+
+                    <h3>
+                      <p>Github: Top repositories.</p>
+                    </h3>
+
+                    <br />
+
                     <p>Hashnode.com | Dev.to | Github.com</p>
                   </>
                 )}

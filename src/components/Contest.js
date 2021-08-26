@@ -97,7 +97,20 @@ const Contest = () => {
       </div>
       <div style={styles.listOuterContainer}>
         {!contestList[0] ? (
-          <>"nothing"</>
+          <>
+            <h3>
+              Upcoming and Ongoing contests from your Favourite ❤️ Platforms!
+            </h3>
+            <br />
+            <h4>🟠 Upcomming Contests and Challenges</h4>
+            <h4>🟢 Ongoing | Past Contests and Challenges</h4>
+            <br />
+            <center>Codechef.com | Codeforces.com | Hackerearth.com</center>
+
+            <center>Leetcode.com | CTFtime.org</center>
+
+            <br />
+          </>
         ) : (
           <>
             {loading === true ? (
