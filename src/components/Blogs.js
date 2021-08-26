@@ -153,9 +153,7 @@ function Blogs() {
                           <h3 style={styles.postTitle}>
                             {post.title.substr(0, 70)}...
                           </h3>
-                          <p style={styles.postAuther}>
-                            By: {post.author.name.split(" ")[0]}
-                          </p>
+                          <p style={styles.postAuther}>✍️ {post.author.name}</p>
                         </div>
                       </div>
                     </a>
@@ -199,7 +197,7 @@ function Blogs() {
                                 {post.title.substr(0, 70)} ...
                               </h3>
                               <p style={styles.postAuther}>
-                                By: {post.user.name.split(" ")[0]}
+                                ✍️ {post.user.name}
                               </p>
                             </div>
                           </div>
@@ -316,19 +314,21 @@ const styles = {
     textDecoration: "underline 2px rgba(248,252,251,.582)",
   },
   postContent: {
-    width: "100%",
-    height: "100px",
+    width: "90%",
+    height: "auto",
+    padding: "2%",
     background: "rgba(248,252,251,.582)",
     boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
     display: "flex",
     alignItems: "center",
-    marginBottom: "2%",
+    margin: "1% auto",
   },
   postContentGithub: {
-    width: "95%",
-    padding: "2%",
+    width: "90%",
+    padding: "3%",
     height: "auto",
+    margin: "1% auto",
     background: "rgba(248,252,251,.582)",
     boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
@@ -346,26 +346,25 @@ const styles = {
   postImage: {
     width: "30%",
     height: "70px",
-    margin: "auto 2% auto 3%",
+    margin: "auto 2% auto 2%",
     borderRadius: "7px",
     boxShadow: "2px 2px 5px #e0e6edcc",
   },
   postInfo: {
-    width: "60%",
-    height: "70px",
-    padding: "2%",
+    width: "70%",
+    marginLeft: "1%",
+    height: "auto",
   },
   postTitle: {
-    fontWeight: 400,
+    fontWeight: 500,
     fontSize: 15,
     color: "#252429",
-    marginTop: "0",
     fontFamily: "'Rubik', sans-serif",
   },
   postAuther: {
-    margin: "0",
     fontSize: 12,
     textAlign: "right",
+    marginRight: "3%",
     color: "#252429",
     fontFamily: "'Rubik', sans-serif",
   },

@@ -3,15 +3,17 @@ import "regenerator-runtime/runtime.js";
 const axios = require("axios");
 
 const Contest = () => {
-  // const [codechef, setCodechef] = useState(false);
-  // const [codeforces, setCodeforces] = useState(false);
-  // const [hackerearth, setHackerearth] = useState(false);
-  // const [leetcode, setLeetcode] = useState(false);
-  // const [hackerrank, setHackerrank] = useState(false);
-  const [resourceName, setResourceName] = useState({});
-  const [activeList, setActiveList] = useState("");
+  const [contestList, setcontestList] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [currentDate, setCurrentDate] = useState("");
 
   async function contestListFetcher(resource) {
+    setLoading(true);
+
+    var currentTime = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
+    setCurrentDate(currentTime);
+    // console.log(contestList[0].start.slice(0, 10).replace(/-/g, "/"));
+
     try {
       const response = await fetch("http://localhost:5000/contest", {
         method: "POST",
@@ -19,30 +21,12 @@ const Contest = () => {
         body: JSON.stringify({ resource: resource }),
       });
       const apiResponse = await response.json();
-      setResourceName(apiResponse.objects);
-      // console.log(resourceName);
+      setcontestList(apiResponse.objects);
+
+      setLoading(false);
+      // console.log(contestList);
     } catch (error) {
       console.log(error);
-    }
-  }
-
-  function renderList(active) {
-    switch (active) {
-      case "codechef":
-        return;
-
-      case "codeforces":
-        return;
-      case "hackerearth":
-        return;
-      case "codechef":
-        return;
-      case "leetcode":
-        return;
-      case "hackerrank":
-        return;
-      default:
-        return <h1>HIEHEIEHI</h1>;
     }
   }
 
@@ -54,7 +38,6 @@ const Contest = () => {
           style={styles.platformInnerDiv}
           onClick={() => {
             contestListFetcher("codechef.com");
-            setActiveList("codechef");
           }}
         >
           <img
@@ -67,7 +50,6 @@ const Contest = () => {
           style={styles.platformInnerDiv}
           onClick={() => {
             contestListFetcher("codeforces.com");
-            setActiveList("codeforces");
           }}
         >
           <img
@@ -80,7 +62,6 @@ const Contest = () => {
           style={styles.platformInnerDiv}
           onClick={() => {
             contestListFetcher("hackerearth.com");
-            setActiveList("hackerearth");
           }}
         >
           <img
@@ -93,7 +74,6 @@ const Contest = () => {
           style={styles.platformInnerDiv}
           onClick={() => {
             contestListFetcher("leetcode.com");
-            setActiveList("leetcode");
           }}
         >
           <img
@@ -105,18 +85,67 @@ const Contest = () => {
         <div
           style={styles.platformInnerDiv}
           onClick={() => {
-            contestListFetcher("hackerrank.com");
-            setActiveList("hackerrank");
+            contestListFetcher("ctftime.org");
           }}
         >
           <img
             style={styles.platformLogo}
-            src="https://www.hackerrank.com/wp-content/uploads/2018/08/hackerrank_logo.png"
-            alt="https://www.hackerrank.com/"
+            src="https://ctftime.org/static/images/ct/logo.svg"
+            alt="https://ctftime.org/"
           />
         </div>
       </div>
-      <div style={styles.listOuterContainer}>{renderList({ activeList })}</div>
+      <div style={styles.listOuterContainer}>
+        {!contestList[0] ? (
+          <>"nothing"</>
+        ) : (
+          <>
+            {loading === true ? (
+              <div>
+                <h2>Fetching Upcoming contests 🏄🏼‍♂️</h2>
+              </div>
+            ) : (
+              <div style={styles.postOuterContainer}>
+                {contestList.map((post, id) => {
+                  return (
+                    <a
+                      key={id}
+                      style={styles.postsContainer}
+                      href={post.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <div style={styles.postContent}>
+                        <div style={styles.postInfo}>
+                          <h3 style={styles.postTitle}>
+                            {post.event}{" "}
+                            {currentDate <
+                            post.start.slice(0, 10).replace(/-/g, "/")
+                              ? "🟠"
+                              : "🟢"}
+                          </h3>
+                          <p style={styles.postTiming}>
+                            <strong>Start: </strong> {post.start.slice(11, 19)}
+                            {",  "}
+                            {"  "}
+                            {post.start.slice(0, 10).replace(/-/g, "/")}
+                          </p>
+                          <p style={styles.postTiming}>
+                            <strong>End: </strong> {post.end.slice(11, 19)}
+                            {",  "}
+                            {"  "}
+                            {post.end.slice(0, 10).replace(/-/g, "/")}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
@@ -125,7 +154,7 @@ export default Contest;
 
 const styles = {
   main: {
-    width: "420px",
+    maxWidth: "420px",
     height: "570px",
     background: "#f9fafc",
     overflow: "auto",
@@ -140,19 +169,20 @@ const styles = {
     fontFamily: "'Open Sans', sans-serif",
     transform: "skew(-12deg)",
     background: "#f0dab1",
-    width: "80%",
+    width: "70%",
     height: "30px",
     borderRadius: "7px",
   },
   platformDiv: {
     display: "flex",
     justifyContent: "center",
+    width: "100%",
   },
   platformInnerDiv: {
     cursor: "pointer",
-    margin: "3% 1%",
-    padding: "1%",
-    width: "60px",
+    margin: "3% 0.5%",
+    // padding: "1%",
+    width: "76px",
     height: "45px",
     background: "#ffff",
     boxShadow: "2px 2px 1px #e0e6edcc",
@@ -162,18 +192,52 @@ const styles = {
     alignItems: "center",
   },
   platformLogo: {
-    width: "60px",
-    height: "20px",
+    width: "100%",
+
+    // height: "20px",
   },
   listOuterContainer: {
     height: "68%",
     padding: "2% 3%",
     overflow: "auto",
-    border: "2px solid red",
   },
   listContainer: {
     height: "72%",
     padding: "2% 3%",
     textDecoration: "underline 2px rgba(248,252,251,.582)",
+  },
+  postsContainer: {
+    height: "72%",
+    padding: "2% 3%",
+    textDecoration: "underline 2px rgba(248,252,251,.582)",
+  },
+  postContent: {
+    width: "90%",
+    height: "auto",
+    padding: "3%",
+    background: "rgba(248,252,251,.582)",
+    boxShadow: "2px 2px 1px #e0e6edcc",
+    borderRadius: "7px",
+    display: "flex",
+    alignItems: "center",
+    margin: "1% auto",
+  },
+  postInfo: {
+    width: "100%",
+    height: "auto",
+    padding: "3%",
+  },
+  postTitle: {
+    fontWeight: 500,
+    fontSize: 18,
+    color: "#252429",
+    marginTop: "0",
+    fontFamily: "'Rubik', sans-serif",
+  },
+  postTiming: {
+    margin: "0",
+    fontSize: 15,
+    color: "#252429",
+    fontFamily: "'Rubik', sans-serif",
   },
 };
