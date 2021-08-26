@@ -47,7 +47,6 @@ function Blogs() {
       const apiResponse = await response.json();
       setHashnodePosts(apiResponse.data.storiesFeed);
       setLoading(false);
-      // console.log(hashnodePosts);
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +66,6 @@ function Blogs() {
       const apiResponse = await response.json();
       setDevtoPosts(apiResponse);
       setLoading(false);
-      // console.log(devtoPosts);
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +81,6 @@ function Blogs() {
         "https://gtrend.yapie.me/repositories?since=daily"
       );
       const trendingRepos = await response.json();
-      // console.log(trendingRepos);
       setLoading(false);
       setGithubRepo(trendingRepos);
     } catch (error) {

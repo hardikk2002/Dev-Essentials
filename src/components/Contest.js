@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "regenerator-runtime/runtime.js";
-const axios = require("axios");
 
 const Contest = () => {
   const [contestList, setcontestList] = useState({});
@@ -12,7 +11,6 @@ const Contest = () => {
 
     var currentTime = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
     setCurrentDate(currentTime);
-    // console.log(contestList[0].start.slice(0, 10).replace(/-/g, "/"));
 
     try {
       const response = await fetch("http://localhost:5000/contest", {
@@ -24,7 +22,6 @@ const Contest = () => {
       setcontestList(apiResponse.objects);
 
       setLoading(false);
-      // console.log(contestList);
     } catch (error) {
       console.log(error);
     }
@@ -194,7 +191,6 @@ const styles = {
   platformInnerDiv: {
     cursor: "pointer",
     margin: "3% 0.5%",
-    // padding: "1%",
     width: "76px",
     height: "45px",
     background: "#ffff",
@@ -206,8 +202,6 @@ const styles = {
   },
   platformLogo: {
     width: "100%",
-
-    // height: "20px",
   },
   listOuterContainer: {
     height: "68%",
