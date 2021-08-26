@@ -1,84 +1,54 @@
 import React, { useState } from "react";
 import "regenerator-runtime/runtime.js";
-const axios = require("axios");
 
 const Contest = () => {
-  const [codechef, setCodechef] = useState(false);
-  const [codeforces, setCodeforces] = useState(false);
-  const [hackerearth, setHackerearth] = useState(false);
-  const [atcoder, setAtcoder] = useState(false);
-  // const [leetcode, setLeetcode] = useState(false);
-  // const [hackerrank, setHackerrank] = useState(false);
+  const [contestList, setcontestList] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [currentDate, setCurrentDate] = useState("");
 
-  const [codechefPosts, setCodechefePosts] = useState([]);
-  const [codeforcesPosts, setCodeforcesPosts] = useState([]);
-  const [hackereartPosts, setHackerearthPosts] = useState([]);
+  async function contestListFetcher(resource) {
+    setLoading(true);
 
-  async function contestListFetcher() {
-    let clientKey =
-      "username=hardikk2002&api_key=acd3004b4db9654e1c74db2a1323ee744c8c9d3c";
-    try {
-      const response = await fetch(
-        "https://clist.by:443/api/v2/contest/13281548/"
-      );
-      const apiResponse = await response.json();
-      console.log(apiResponse);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  async function codechefFetcher() {
-    setCodechef(true);
-    setCodeforces(false);
-    setHackerearth(false);
-    setAtcoder(false);
-  }
-  async function codeforcesFetcher() {
-    setCodechef(false);
-    setCodeforces(true);
-    setHackerearth(false);
-    setAtcoder(false);
+    var currentTime = new Date().toJSON().slice(0, 10).replace(/-/g, "/");
+    setCurrentDate(currentTime);
 
     try {
-      const response = await fetch(
-        "https://clist.by/api/v2/contest/13281548/?format=json/?username=hardikk2002&api_key=acd3004b4db9654e1c74db2a1323ee744c8c9d3c",
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "http://localhost:8080/contest.html",
-            // "Set-Cookie: cross-site-cookie": "whatever",
-            // SameSite: "None",
-          },
-        }
-      );
+      const response = await fetch("http://localhost:5000/contest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ resource: resource }),
+      });
       const apiResponse = await response.json();
-      const contestList = apiResponse.result.filter(
-        (obj) => obj.phase === "BEFORE"
-      );
-      setCodeforcesPosts(contestList);
-      console.log(codeforcesPosts);
+      setcontestList(apiResponse.objects);
+
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function hackerearthFetcher() {
-    setCodechef(true);
-    setCodeforces(false);
-    setHackerearth(false);
-    setAtcoder(false);
-  }
   return (
     <div style={styles.main}>
       <h1 style={styles.headerTitle}>Coding Contests 🌈</h1>
       <div style={styles.platformDiv}>
-        <div style={styles.platformInnerDiv} onClick={codechefFetcher}>
+        <div
+          style={styles.platformInnerDiv}
+          onClick={() => {
+            contestListFetcher("codechef.com");
+          }}
+        >
           <img
             style={styles.platformLogo}
             src="https://cdn.codechef.com/sites/all/themes/abessive/cc-logo.svg"
             alt="https://www.codechef.com/"
           />
         </div>
-        <div style={styles.platformInnerDiv} onClick={codeforcesFetcher}>
+        <div
+          style={styles.platformInnerDiv}
+          onClick={() => {
+            contestListFetcher("codeforces.com");
+          }}
+        >
           <img
             style={styles.platformLogo}
             src="https://codeforces.org/s/85175/images/codeforces-logo-with-telegram.png"
@@ -88,8 +58,7 @@ const Contest = () => {
         <div
           style={styles.platformInnerDiv}
           onClick={() => {
-            setCodechef(true);
-            contestListFetcher();
+            contestListFetcher("hackerearth.com");
           }}
         >
           <img
@@ -101,8 +70,7 @@ const Contest = () => {
         <div
           style={styles.platformInnerDiv}
           onClick={() => {
-            setCodechef(true);
-            contestListFetcher();
+            contestListFetcher("leetcode.com");
           }}
         >
           <img
@@ -114,18 +82,80 @@ const Contest = () => {
         <div
           style={styles.platformInnerDiv}
           onClick={() => {
-            setCodechef(true);
-            contestListFetcher();
+            contestListFetcher("ctftime.org");
           }}
         >
           <img
             style={styles.platformLogo}
-            src="https://www.hackerrank.com/wp-content/uploads/2018/08/hackerrank_logo.png"
-            alt="https://www.hackerrank.com/"
+            src="https://ctftime.org/static/images/ct/logo.svg"
+            alt="https://ctftime.org/"
           />
         </div>
       </div>
-      <div style={styles.listOuterContainer}></div>
+      <div style={styles.listOuterContainer}>
+        {!contestList[0] ? (
+          <>
+            <h3>
+              Upcoming and Ongoing contests from your Favourite ❤️ Platforms!
+            </h3>
+            <br />
+            <h4>🟠 Upcomming Contests and Challenges</h4>
+            <h4>🟢 Ongoing | Past Contests and Challenges</h4>
+            <br />
+            <center>Codechef.com | Codeforces.com | Hackerearth.com</center>
+
+            <center>Leetcode.com | CTFtime.org</center>
+
+            <br />
+          </>
+        ) : (
+          <>
+            {loading === true ? (
+              <div>
+                <h2>Fetching Upcoming contests 🏄🏼‍♂️</h2>
+              </div>
+            ) : (
+              <div style={styles.postOuterContainer}>
+                {contestList.map((post, id) => {
+                  return (
+                    <a
+                      key={id}
+                      style={styles.postsContainer}
+                      href={post.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <div style={styles.postContent}>
+                        <div style={styles.postInfo}>
+                          <h3 style={styles.postTitle}>
+                            {post.event}{" "}
+                            {currentDate <
+                            post.start.slice(0, 10).replace(/-/g, "/")
+                              ? "🟠"
+                              : "🟢"}
+                          </h3>
+                          <p style={styles.postTiming}>
+                            <strong>Start: </strong> {post.start.slice(11, 19)}
+                            {",  "}
+                            {"  "}
+                            {post.start.slice(0, 10).replace(/-/g, "/")}
+                          </p>
+                          <p style={styles.postTiming}>
+                            <strong>End: </strong> {post.end.slice(11, 19)}
+                            {",  "}
+                            {"  "}
+                            {post.end.slice(0, 10).replace(/-/g, "/")}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
@@ -134,7 +164,7 @@ export default Contest;
 
 const styles = {
   main: {
-    width: "420px",
+    maxWidth: "420px",
     height: "570px",
     background: "#f9fafc",
     overflow: "auto",
@@ -149,19 +179,19 @@ const styles = {
     fontFamily: "'Open Sans', sans-serif",
     transform: "skew(-12deg)",
     background: "#f0dab1",
-    width: "80%",
+    width: "70%",
     height: "30px",
     borderRadius: "7px",
   },
   platformDiv: {
     display: "flex",
     justifyContent: "center",
+    width: "100%",
   },
   platformInnerDiv: {
     cursor: "pointer",
-    margin: "3% 1%",
-    padding: "1%",
-    width: "60px",
+    margin: "3% 0.5%",
+    width: "76px",
     height: "45px",
     background: "#ffff",
     boxShadow: "2px 2px 1px #e0e6edcc",
@@ -171,18 +201,50 @@ const styles = {
     alignItems: "center",
   },
   platformLogo: {
-    width: "60px",
-    height: "20px",
+    width: "100%",
   },
   listOuterContainer: {
     height: "68%",
     padding: "2% 3%",
     overflow: "auto",
-    border: "2px solid red",
   },
   listContainer: {
     height: "72%",
     padding: "2% 3%",
     textDecoration: "underline 2px rgba(248,252,251,.582)",
+  },
+  postsContainer: {
+    height: "72%",
+    padding: "2% 3%",
+    textDecoration: "underline 2px rgba(248,252,251,.582)",
+  },
+  postContent: {
+    width: "90%",
+    height: "auto",
+    padding: "3%",
+    background: "rgba(248,252,251,.582)",
+    boxShadow: "2px 2px 1px #e0e6edcc",
+    borderRadius: "7px",
+    display: "flex",
+    alignItems: "center",
+    margin: "1% auto",
+  },
+  postInfo: {
+    width: "100%",
+    height: "auto",
+    padding: "3%",
+  },
+  postTitle: {
+    fontWeight: 500,
+    fontSize: 18,
+    color: "#252429",
+    marginTop: "0",
+    fontFamily: "'Rubik', sans-serif",
+  },
+  postTiming: {
+    margin: "0",
+    fontSize: 15,
+    color: "#252429",
+    fontFamily: "'Rubik', sans-serif",
   },
 };
