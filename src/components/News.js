@@ -4,8 +4,12 @@ import SearchIcon from "@material-ui/icons/Search";
 const emptyArr = [];
 const News = () => {
   const [loading, setLoading] = useState(false);
-  const [appleTesla, setAppleTeslay] = useState("");
+  const [apple, setApple] = useState(false);
+  const [tesla, setTesla] = useState(false);
+  const [keySearch, setKeySearch] = useState(false);
+
   const [searchKey, setSearchKey] = useState("");
+  const [errorHandle, setErrorHandle] = useState("");
 
   const [newsList, setNewsList] = useState([]);
   const [appleList, setAppleList] = useState([]);
@@ -13,32 +17,48 @@ const News = () => {
 
   async function listFetcherApple() {
     setLoading(true);
+    setApple(true);
+    setTesla(false);
+    setKeySearch(false);
     try {
       const response = await fetch("http://localhost:5000/news-apple");
       const apiResponse = await response.json();
-      setAppleList(apiResponse);
-      console.log(appleList);
+      {
+        apiResponse === "error"
+          ? setErrorHandle("Taking time to fetch, try later 🟠")
+          : setAppleList(apiResponse);
+      }
+
+      // console.log(appleList);
       setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
 
   async function listFetcherTesla() {
     setLoading(true);
+    setApple(false);
+    setTesla(true);
+    setKeySearch(false);
     try {
       const response = await fetch("http://localhost:5000/news-tesla");
       const apiResponse = await response.json();
-      setTeslaList(apiResponse);
-      console.log(teslaList);
+      {
+        apiResponse === "error"
+          ? setErrorHandle("Taking time to fetch, try later 🟠")
+          : setTeslaList(apiResponse);
+      }
+      // console.log(teslaList);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      setErrorHandle("Taking time to fetch, try later 🟠");
     }
   }
 
   async function newsListFetcher() {
     setLoading(true);
+    setApple(false);
+    setTesla(false);
+    setKeySearch(true);
 
     // var currentTime = new Date().toJSON().slice(0, 10);
     if (searchKey !== "") {
@@ -50,12 +70,18 @@ const News = () => {
             resource: searchKey,
           }),
         });
+
         const apiResponse = await response.json();
-        setNewsList(apiResponse);
-        console.log(newsList);
+        {
+          apiResponse === "error"
+            ? setErrorHandle("Taking time to fetch, try later 🟠")
+            : setNewsList(apiResponse);
+        }
+
+        // console.log(newsList);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.log("error");
       }
     }
   }
@@ -90,7 +116,7 @@ const News = () => {
               style={styles.taskInput}
               type="text"
               // value={searchKey}
-              placeholder="Enter a title for this task…"
+              placeholder="Enter a keyword..."
               onChange={(e) => setSearchKey(e.target.value)}
             />
             <button type="submit" style={styles.searchKeyIcon}>
@@ -98,6 +124,115 @@ const News = () => {
             </button>
           </form>
         </div>
+      </div>
+      <div style={styles.postsContainer}>
+        {appleList[0] && apple ? (
+          <>
+            {loading === true ? (
+              <div>
+                <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
+              </div>
+            ) : (
+              <div style={styles.postOuterContainer}>
+                {appleList.map((post, index) => {
+                  return (
+                    <a
+                      key={index}
+                      style={styles.postsContainer}
+                      href={post.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <div style={styles.postContent}>
+                        <img
+                          style={styles.postImage}
+                          src={post.urlToImage}
+                          alt="cover-img"
+                        />
+                        <div style={styles.postInfo}>
+                          <h3 style={styles.postTitle}>{post.title}</h3>
+                          <p style={styles.postAuther}>✍️ {post.author}</p>
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            )}
+          </>
+        ) : teslaList[0] && tesla ? (
+          <>
+            {loading === true ? (
+              <div>
+                <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
+              </div>
+            ) : (
+              <div style={styles.postOuterContainer}>
+                {teslaList.map((post, index) => {
+                  return (
+                    <a
+                      key={index}
+                      style={styles.postsContainer}
+                      href={post.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <div style={styles.postContent}>
+                        <img
+                          style={styles.postImage}
+                          src={post.urlToImage}
+                          alt="cover-img"
+                        />
+                        <div style={styles.postInfo}>
+                          <h3 style={styles.postTitle}>{post.title}</h3>
+                          <p style={styles.postAuther}>✍️ {post.author}</p>
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            )}
+          </>
+        ) : newsList[0] && keySearch ? (
+          <>
+            {loading === true ? (
+              <div>
+                <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
+              </div>
+            ) : (
+              <div style={styles.postOuterContainer}>
+                {newsList.map((post, index) => {
+                  return (
+                    <a
+                      key={index}
+                      style={styles.postsContainer}
+                      href={post.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <div style={styles.postContent}>
+                        <img
+                          style={styles.postImage}
+                          src={post.urlToImage}
+                          alt="cover-img"
+                        />
+                        <div style={styles.postInfo}>
+                          <h3 style={styles.postTitle}>{post.title}</h3>
+                          <p style={styles.postAuther}>✍️ {post.author}</p>
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            )}
+          </>
+        ) : { errorHandle } ? (
+          `${errorHandle}`
+        ) : (
+          "Nothing"
+        )}
       </div>
     </div>
   );
@@ -133,7 +268,7 @@ const styles = {
   },
   platformInnerDiv: {
     cursor: "pointer",
-    margin: "3% 0.5%",
+    margin: "3% 1%",
     width: "50px",
     height: "50px",
     background: "#ffff",
@@ -149,19 +284,18 @@ const styles = {
   },
   searchKey: {
     cursor: "pointer",
-    margin: "3% 0.5%",
-    width: "150px",
+    margin: "3% 1%",
+    maxWidth: "70%",
     height: "50px",
-    background: "#ffff",
-    boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
     display: "flex",
+    justifyContent: "space-between",
+    border: "2px solid red",
   },
   taskInput: {
     height: "40px",
     padding: " 0 10px",
     margin: "auto",
-    width: "60%",
     outline: "none",
     background: "#ffff",
     color: "#252429",
@@ -169,6 +303,23 @@ const styles = {
     fontFamily: "'Rubik', sans-serif",
     border: "3px solid #e0e6edcc",
     borderRadius: "28px",
+  },
+  searchKeyIcon: {
+    background: "#aaaaaac4",
+    border: "none",
+    color: "#ffff",
+    padding: "1%",
+    margin: "1% 0 0 1%",
+    borderRadius: "50%",
+    cursor: "pointer",
+    margin: "2% auto",
     display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  postsContainer: {
+    height: "72%",
+    padding: "2% 3%",
+    textDecoration: "underline 2px rgba(248,252,251,.582)",
   },
 };
