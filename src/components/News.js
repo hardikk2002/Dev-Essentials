@@ -84,7 +84,7 @@ const News = () => {
         setLoading(false);
       } catch (error) {
         setErrorHandle(
-          "Taking time to fetch, try later or change your search key 🟠"
+          "Taking time to fetch, try later or change the search key 🟠"
         );
       }
     }
@@ -116,126 +116,120 @@ const News = () => {
               newsListFetcher();
             }}
           >
-            <input
-              style={styles.taskInput}
-              type="text"
-              // value={searchKey}
-              placeholder="Enter a keyword..."
-              onChange={(e) => setSearchKey(e.target.value)}
-            />
-            <button type="submit" style={styles.searchKeyIcon}>
-              <SearchIcon />
-            </button>
+            <div style={styles.taskSection}>
+              <input
+                style={styles.taskInput}
+                type="text"
+                // value={searchKey}
+                placeholder="Enter a keyword..."
+                onChange={(e) => setSearchKey(e.target.value)}
+              />
+              <button type="submit" style={styles.searchKeyIcon}>
+                <SearchIcon />
+              </button>
+            </div>
           </form>
         </div>
       </div>
       <div style={styles.postsContainer}>
-        {appleList[0] && apple ? (
+        {loading === true ? (
           <>
-            {loading === true ? (
-              <div>
-                <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
-              </div>
-            ) : (
-              <div style={styles.postOuterContainer}>
-                {appleList.map((post, index) => {
-                  return (
-                    <a
-                      key={index}
-                      style={styles.postsContainer}
-                      href={post.url}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <div style={styles.postContent}>
-                        <img
-                          style={styles.postImage}
-                          src={post.urlToImage}
-                          alt="cover-img"
-                        />
-                        <div style={styles.postInfo}>
-                          <h3 style={styles.postTitle}>{post.title}</h3>
-                          <p style={styles.postAuther}>✍️ {post.author}</p>
-                        </div>
-                      </div>
-                    </a>
-                  );
-                })}
-              </div>
-            )}
+            <div>
+              <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
+            </div>
           </>
-        ) : teslaList[0] && tesla ? (
-          <>
-            {loading === true ? (
-              <div>
-                <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
-              </div>
-            ) : (
-              <div style={styles.postOuterContainer}>
-                {teslaList.map((post, index) => {
-                  return (
-                    <a
-                      key={index}
-                      style={styles.postsContainer}
-                      href={post.url}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <div style={styles.postContent}>
-                        <img
-                          style={styles.postImage}
-                          src={post.urlToImage}
-                          alt="cover-img"
-                        />
-                        <div style={styles.postInfo}>
-                          <h3 style={styles.postTitle}>{post.title}</h3>
-                          <p style={styles.postAuther}>✍️ {post.author}</p>
-                        </div>
-                      </div>
-                    </a>
-                  );
-                })}
-              </div>
-            )}
-          </>
-        ) : newsList[0] && keySearch ? (
-          <>
-            {loading === true ? (
-              <div>
-                <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
-              </div>
-            ) : (
-              <div style={styles.postOuterContainer}>
-                {newsList.map((post, index) => {
-                  return (
-                    <a
-                      key={index}
-                      style={styles.postsContainer}
-                      href={post.url}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <div style={styles.postContent}>
-                        <img
-                          style={styles.postImage}
-                          src={post.urlToImage}
-                          alt="cover-img"
-                        />
-                        <div style={styles.postInfo}>
-                          <h3 style={styles.postTitle}>{post.title}</h3>
-                          <p style={styles.postAuther}>✍️ {post.author}</p>
-                        </div>
-                      </div>
-                    </a>
-                  );
-                })}
-              </div>
-            )}
-          </>
-        ) : { errorHandle } ? (
-          `${errorHandle}`
         ) : (
-          "Nothing"
+          <>
+            {appleList[0] && apple ? (
+              <>
+                <div style={styles.postOuterContainer}>
+                  {appleList.map((post, index) => {
+                    return (
+                      <a
+                        key={index}
+                        style={styles.postsContainer}
+                        href={post.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <div style={styles.postContent}>
+                          <img
+                            style={styles.postImage}
+                            src={post.urlToImage}
+                            alt="cover-img"
+                          />
+                          <div style={styles.postInfo}>
+                            <h3 style={styles.postTitle}>{post.title}</h3>
+                            <p style={styles.postAuther}>✍️ {post.author}</p>
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </>
+            ) : teslaList[0] && tesla ? (
+              <>
+                <div style={styles.postOuterContainer}>
+                  {teslaList.map((post, index) => {
+                    return (
+                      <a
+                        key={index}
+                        style={styles.postsContainer}
+                        href={post.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <div style={styles.postContent}>
+                          <img
+                            style={styles.postImage}
+                            src={post.urlToImage}
+                            alt="cover-img"
+                          />
+                          <div style={styles.postInfo}>
+                            <h3 style={styles.postTitle}>{post.title}</h3>
+                            <p style={styles.postAuther}>✍️ {post.author}</p>
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </>
+            ) : newsList[0] && keySearch ? (
+              <>
+                <div style={styles.postOuterContainer}>
+                  {newsList.map((post, index) => {
+                    return (
+                      <a
+                        key={index}
+                        style={styles.postsContainer}
+                        href={post.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <div style={styles.postContent}>
+                          <img
+                            style={styles.postImage}
+                            src={post.urlToImage}
+                            alt="cover-img"
+                          />
+                          <div style={styles.postInfo}>
+                            <h3 style={styles.postTitle}>{post.title}</h3>
+                            <p style={styles.postAuther}>✍️ {post.author}</p>
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </>
+            ) : { errorHandle } ? (
+              `${errorHandle}`
+            ) : (
+              "Nothing"
+            )}
+          </>
         )}
       </div>
     </div>
@@ -273,8 +267,8 @@ const styles = {
   platformInnerDiv: {
     cursor: "pointer",
     margin: "3% 1%",
-    width: "50px",
-    height: "50px",
+    width: "45px",
+    height: "45px",
     background: "#ffff",
     boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
@@ -283,8 +277,13 @@ const styles = {
     alignItems: "center",
   },
   platformLogo: {
-    width: "80%",
-    height: "80%",
+    width: "25px",
+    height: "25px",
+  },
+  taskSection: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   searchKey: {
     cursor: "pointer",
@@ -294,7 +293,6 @@ const styles = {
     borderRadius: "7px",
     display: "flex",
     justifyContent: "space-between",
-    border: "2px solid red",
   },
   taskInput: {
     height: "40px",
@@ -312,11 +310,10 @@ const styles = {
     background: "#aaaaaac4",
     border: "none",
     color: "#ffff",
-    padding: "1%",
-    margin: "1% 0 0 1%",
+    padding: "2%",
     borderRadius: "50%",
     cursor: "pointer",
-    margin: "2% auto",
+    margin: "2%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

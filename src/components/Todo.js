@@ -120,8 +120,11 @@ const styles = {
     borderRadius: "7px",
   },
   todoContainer: {
-    height: "72%",
-    padding: "2% 3%",
+    height: "auto",
+    padding: "3%",
+    textAlign: "center",
+    margin: "5% 3%",
+    borderRadius: "7px",
   },
   taskInput: {
     height: "40px",
@@ -139,6 +142,7 @@ const styles = {
   },
   todoIcon: {
     background: "#aaaaaac4",
+    maxHeight: "1.5rem",
     border: "none",
     color: "#ffff",
     padding: "1%",
@@ -150,7 +154,7 @@ const styles = {
     alignItems: "center",
   },
   todoIconAdd: {
-    background: "#aaaaaac4",
+    background: "#5bc0de",
     border: "none",
     color: "#ffff",
     padding: "1%",
@@ -170,10 +174,9 @@ const styles = {
     fontSize: 16,
     fontFamily: "'Rubik', sans-serif",
     margin: "4% auto",
-    padding: "3%",
-    background: "rgba(248,252,251,.582)",
+    padding: "5%",
     boxShadow: "2px 2px 1px #e0e6edcc",
-    borderRadius: "11px",
+    borderRadius: "7px",
     display: "flex",
     textAlign: "left",
     justifyContent: "space-between",

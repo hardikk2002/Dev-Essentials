@@ -115,13 +115,13 @@ function Blogs() {
         </div>
       </div>
       <div style={styles.postsContainer}>
-        {hashnode ? (
+        {loading === true ? (
+          <div>
+            <h2>Fetching Upcoming contests 🏄🏼‍♂️</h2>
+          </div>
+        ) : (
           <>
-            {loading === true ? (
-              <div>
-                <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
-              </div>
-            ) : (
+            {hashnode ? (
               <div style={styles.postOuterContainer}>
                 {hashnodePosts.map((post, index) => {
                   return (
@@ -157,112 +157,100 @@ function Blogs() {
                   );
                 })}
               </div>
-            )}
-          </>
-        ) : (
-          <>
-            {devto ? (
-              <>
-                {loading === true ? (
-                  <div>
-                    <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
-                  </div>
-                ) : (
-                  <div style={styles.postOuterContainer}>
-                    {devtoPosts.map((post, index) => {
-                      return (
-                        <a
-                          key={index}
-                          style={styles.postsContainer}
-                          href={post.url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          <div style={styles.postContent}>
-                            <img
-                              style={styles.postImage}
-                              src={
-                                post.social_image === ""
-                                  ? "https://res.cloudinary.com/practicaldev/image/fetch/s--R9qwOwpC--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/78hs31fax49uwy6kbxyw.png"
-                                  : post.social_image
-                              }
-                              alt="cover-img"
-                              className="rounded"
-                            />
-                            <div style={styles.postInfo}>
-                              <h3 style={styles.postTitle}>
-                                {post.title.substr(0, 70)} ...
-                              </h3>
-                              <p style={styles.postAuther}>
-                                ✍️ {post.user.name}
-                              </p>
-                            </div>
-                          </div>
-                        </a>
-                      );
-                    })}
-                  </div>
-                )}
-              </>
             ) : (
               <>
-                {github ? (
+                {devto ? (
                   <>
-                    {loading === true ? (
-                      <div>
-                        <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
-                      </div>
-                    ) : (
-                      <div style={styles.postOuterContainer}>
-                        {githubRepo.map((repo, index) => {
-                          return (
-                            <div>
-                              <a
-                                key={index}
-                                style={styles.postsContainer}
-                                href={repo.url}
-                                target="_blank"
-                                rel="noreffer"
-                              >
-                                <div style={styles.postContentGithub}>
-                                  <h3 style={styles.postTitleGithub}>
-                                    {repo.name}
-                                  </h3>
-                                  <p style={styles.postInfoGithub}>
-                                    {repo.description}
-                                  </p>
-
-                                  <p style={styles.postInfoGithub}>
-                                    👨‍💻 {repo.language}
-                                  </p>
-                                </div>
-                              </a>
+                    <div style={styles.postOuterContainer}>
+                      {devtoPosts.map((post, index) => {
+                        return (
+                          <a
+                            key={index}
+                            style={styles.postsContainer}
+                            href={post.url}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <div style={styles.postContent}>
+                              <img
+                                style={styles.postImage}
+                                src={
+                                  post.social_image === ""
+                                    ? "https://res.cloudinary.com/practicaldev/image/fetch/s--R9qwOwpC--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/78hs31fax49uwy6kbxyw.png"
+                                    : post.social_image
+                                }
+                                alt="cover-img"
+                                className="rounded"
+                              />
+                              <div style={styles.postInfo}>
+                                <h3 style={styles.postTitle}>
+                                  {post.title.substr(0, 70)} ...
+                                </h3>
+                                <p style={styles.postAuther}>
+                                  ✍️ {post.user.name}
+                                </p>
+                              </div>
                             </div>
-                          );
-                        })}
-                      </div>
-                    )}
+                          </a>
+                        );
+                      })}
+                    </div>
                   </>
                 ) : (
                   <>
-                    <h3>Get top Posts from your Favourite ❤️ Platforms!</h3>
-                    <br />
+                    {github ? (
+                      <>
+                        <div style={styles.postOuterContainer}>
+                          {githubRepo.map((repo, index) => {
+                            return (
+                              <div>
+                                <a
+                                  key={index}
+                                  style={styles.postsContainer}
+                                  href={repo.url}
+                                  target="_blank"
+                                  rel="noreffer"
+                                >
+                                  <div style={styles.postContentGithub}>
+                                    <h3 style={styles.postTitleGithub}>
+                                      {repo.name}
+                                    </h3>
+                                    <p style={styles.postInfoGithub}>
+                                      {repo.description}
+                                    </p>
 
-                    <h3>
-                      <p>Hashnode: Top 10 blog.</p>
-                    </h3>
+                                    <p style={styles.postInfoGithub}>
+                                      👨‍💻 {repo.language}
+                                    </p>
+                                  </div>
+                                </a>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <h3>Get top Posts from your Favourite ❤️ Platforms!</h3>
+                        <br />
 
-                    <h3>
-                      <p>Devto: Blog Posts.</p>
-                    </h3>
+                        <h3>
+                          <p>Hashnode: Top 10 blog.</p>
+                        </h3>
 
-                    <h3>
-                      <p>Github: Top repositories.</p>
-                    </h3>
+                        <h3>
+                          <p>Devto: Blog Posts.</p>
+                        </h3>
 
-                    <br />
+                        <h3>
+                          <p>Github: Top repositories.</p>
+                        </h3>
 
-                    <p>Hashnode.com | Dev.to | Github.com</p>
+                        <br />
+
+                        <p>Hashnode.com | Dev.to | Github.com</p>
+                      </>
+                    )}
                   </>
                 )}
               </>
@@ -338,7 +326,7 @@ const styles = {
   },
   postContentGithub: {
     width: "90%",
-    padding: "3%",
+    padding: "2%",
     height: "auto",
     margin: "1% auto",
     background: "rgba(248,252,251,.582)",
