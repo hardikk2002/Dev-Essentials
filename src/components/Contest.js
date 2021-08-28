@@ -93,65 +93,69 @@ const Contest = () => {
         </div>
       </div>
       <div style={styles.listOuterContainer}>
-        {!contestList[0] ? (
-          <>
-            <h3>
-              Upcoming and Ongoing contests from your Favourite ❤️ Platforms!
-            </h3>
-            <br />
-            <h4>🟠 Upcomming Contests and Challenges</h4>
-            <h4>🟢 Ongoing | Past Contests and Challenges</h4>
-            <br />
-            <center>Codechef.com | Codeforces.com | Hackerearth.com</center>
-
-            <center>Leetcode.com | CTFtime.org</center>
-
-            <br />
-          </>
+        {loading === true ? (
+          <div style={styles.prePostsContent}>
+            <h2>Fetching Upcoming contests 🏄🏼‍♂️</h2>
+          </div>
         ) : (
           <>
-            {loading === true ? (
-              <div>
-                <h2>Fetching Upcoming contests 🏄🏼‍♂️</h2>
+            {!contestList[0] ? (
+              <div style={styles.prePostsContent}>
+                <h3>
+                  Upcoming and Ongoing contests from your Favourite ❤️
+                  Platforms!
+                </h3>
+                <br />
+                <h4>🟠 Upcomming Contests and Challenges</h4>
+                <h4>🟢 Ongoing | Past Contests and Challenges</h4>
+                <br />
+                <center>Codechef.com | Codeforces.com | Hackerearth.com</center>
+
+                <center>Leetcode.com | CTFtime.org</center>
+
+                <br />
               </div>
             ) : (
-              <div style={styles.postOuterContainer}>
-                {contestList.map((post, id) => {
-                  return (
-                    <a
-                      key={id}
-                      style={styles.postsContainer}
-                      href={post.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <div style={styles.postContent}>
-                        <div style={styles.postInfo}>
-                          <h3 style={styles.postTitle}>
-                            {post.event}{" "}
-                            {currentDate <
-                            post.start.slice(0, 10).replace(/-/g, "/")
-                              ? "🟠"
-                              : "🟢"}
-                          </h3>
-                          <p style={styles.postTiming}>
-                            <strong>Start: </strong> {post.start.slice(11, 19)}
-                            {",  "}
-                            {"  "}
-                            {post.start.slice(0, 10).replace(/-/g, "/")}
-                          </p>
-                          <p style={styles.postTiming}>
-                            <strong>End: </strong> {post.end.slice(11, 19)}
-                            {",  "}
-                            {"  "}
-                            {post.end.slice(0, 10).replace(/-/g, "/")}
-                          </p>
+              <>
+                <div style={styles.postOuterContainer}>
+                  {contestList.map((post, id) => {
+                    return (
+                      <a
+                        key={id}
+                        style={styles.postsContainer}
+                        href={post.href}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <div style={styles.postContent}>
+                          <div style={styles.postInfo}>
+                            <h3 style={styles.postTitle}>
+                              {post.event}{" "}
+                              {currentDate <
+                              post.start.slice(0, 10).replace(/-/g, "/")
+                                ? "🟠"
+                                : "🟢"}
+                            </h3>
+                            <p style={styles.postTiming}>
+                              <strong>Start: </strong>{" "}
+                              {post.start.slice(11, 19)}
+                              {",  "}
+                              {"  "}
+                              {post.start.slice(0, 10).replace(/-/g, "/")}
+                            </p>
+                            <p style={styles.postTiming}>
+                              <strong>End: </strong> {post.end.slice(11, 19)}
+                              {",  "}
+                              {"  "}
+                              {post.end.slice(0, 10).replace(/-/g, "/")}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </a>
-                  );
-                })}
-              </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </>
             )}
           </>
         )}
@@ -189,8 +193,8 @@ const styles = {
   },
   platformInnerDiv: {
     cursor: "pointer",
-    margin: "3% 0.5%",
-    width: "76px",
+    margin: "3% 1%",
+    width: "70px",
     height: "45px",
     background: "#ffff",
     boxShadow: "2px 2px 1px #e0e6edcc",
@@ -200,7 +204,8 @@ const styles = {
     alignItems: "center",
   },
   platformLogo: {
-    width: "100%",
+    width: "80%",
+    transform: "scale(1.2)",
   },
   listOuterContainer: {
     height: "68%",
@@ -209,13 +214,10 @@ const styles = {
   listContainer: {
     height: "72%",
     padding: "2% 3%",
-    overflow: "auto",
-    textDecoration: "underline 2px rgba(248,252,251,.582)",
   },
   postsContainer: {
     height: "72%",
-    padding: "2% 3%",
-    overflow: "auto",
+    padding: "2%",
     textDecoration: "underline 2px rgba(248,252,251,.582)",
   },
   postContent: {
@@ -223,7 +225,7 @@ const styles = {
     height: "auto",
     padding: "3%",
     background: "rgba(248,252,251,.582)",
-    boxShadow: "2px 2px 1px #835CD2",
+    boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
     display: "flex",
     alignItems: "center",
@@ -243,6 +245,14 @@ const styles = {
   },
   postTiming: {
     margin: "0",
+    fontSize: 15,
+    color: "#252429",
+    fontFamily: "'Rubik', sans-serif",
+  },
+  prePostsContent: {
+    margin: "auto",
+    width: "90%",
+    fontWeight: 500,
     fontSize: 15,
     color: "#252429",
     fontFamily: "'Rubik', sans-serif",

@@ -116,7 +116,7 @@ function Blogs() {
       </div>
       <div style={styles.postsContainer}>
         {loading === true ? (
-          <div>
+          <div style={styles.prePostsContent}>
             <h2>Fetching Upcoming contests 🏄🏼‍♂️</h2>
           </div>
         ) : (
@@ -230,26 +230,22 @@ function Blogs() {
                         </div>
                       </>
                     ) : (
-                      <>
+                      <div style={styles.prePostsContent}>
                         <h3>Get top Posts from your Favourite ❤️ Platforms!</h3>
                         <br />
-
-                        <h3>
-                          <p>Hashnode: Top 10 blog.</p>
-                        </h3>
-
-                        <h3>
-                          <p>Devto: Blog Posts.</p>
-                        </h3>
-
-                        <h3>
-                          <p>Github: Top repositories.</p>
-                        </h3>
-
+                        <p>
+                          <strong>Hashnode:</strong> Top 10 blog.
+                        </p>
+                        <p>
+                          <strong>Devto:</strong> Blog Posts.
+                        </p>
+                        <p>
+                          <strong>Github:</strong> Top repositories.
+                        </p>
                         <br />
 
                         <p>Hashnode.com | Dev.to | Github.com</p>
-                      </>
+                      </div>
                     )}
                   </>
                 )}
@@ -318,7 +314,7 @@ const styles = {
     height: "auto",
     padding: "2%",
     background: "rgba(248,252,251,.582)",
-    boxShadow: "2px 2px 1px #835CD2",
+    boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
     display: "flex",
     alignItems: "center",
@@ -330,7 +326,7 @@ const styles = {
     height: "auto",
     margin: "1% auto",
     background: "rgba(248,252,251,.582)",
-    boxShadow: "2px 2px 1px #835CD2",
+    boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
   },
   postTitleGithub: {
@@ -365,6 +361,14 @@ const styles = {
     fontSize: 12,
     textAlign: "right",
     marginRight: "3%",
+    color: "#252429",
+    fontFamily: "'Rubik', sans-serif",
+  },
+  prePostsContent: {
+    margin: "auto",
+    width: "90%",
+    fontWeight: 500,
+    fontSize: 15,
     color: "#252429",
     fontFamily: "'Rubik', sans-serif",
   },
