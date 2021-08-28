@@ -15,15 +15,15 @@ module.exports = {
   },
   entry: {
     popup: path.resolve(__dirname, "./src/entry/index-popup.js"),
-    options: path.resolve(__dirname, "./src/entry/index-options.js"),
-    blogs: path.resolve(__dirname, "./src/entry/index-blogs.js"),
-    todo: path.resolve(__dirname, "./src/entry/index-todo.js"),
-    contest: path.resolve(__dirname, "./src/entry/index-contest.js"),
+    // news: path.resolve(__dirname, "./src/entry/index-news.js"),
+    // blogs: path.resolve(__dirname, "./src/entry/index-blogs.js"),
+    // todo: path.resolve(__dirname, "./src/entry/index-todo.js"),
+    // contest: path.resolve(__dirname, "./src/entry/index-contest.js"),
   },
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
-    // publicPath: '/dist'
+    // publicPath: "/dist",
   },
   module: {
     rules: [
@@ -56,26 +56,27 @@ module.exports = {
       template: "src/html/popup.html",
       chunks: ["popup"],
     }),
-    new HtmlWebpackPlugin({
-      filename: "options.html",
-      template: "src/html/options.html",
-      chunks: ["options"],
-    }),
-    new HtmlWebpackPlugin({
-      filename: "blogs.html",
-      template: "src/html/blogs.html",
-      chunks: ["blogs"],
-    }),
-    new HtmlWebpackPlugin({
-      filename: "todo.html",
-      template: "src/html/todo.html",
-      chunks: ["todo"],
-    }),
-    new HtmlWebpackPlugin({
-      filename: "contest.html",
-      template: "src/html/contest.html",
-      chunks: ["contest"],
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: "news.html",
+    //   template: "src/html/news.html",
+    //   chunks: ["news"],
+    // }),
+    // new HtmlWebpackPlugin({
+    //   filename: "blogs.html",
+    //   template: "src/html/blogs.html",
+    //   chunks: ["blogs"],
+    // }),
+    // new HtmlWebpackPlugin({
+    //   filename: "todo.html",
+    //   template: "src/html/todo.html",
+    //   chunks: ["todo"],
+    // }),
+    // new HtmlWebpackPlugin({
+    //   filename: "contest.html",
+    //   template: "src/html/contest.html",
+    //   chunks: ["contest"],
+    // }),
+
     new CopyWebpackPlugin({
       patterns: [
         { from: "src/manifest.json", to: "[name].[ext]" },

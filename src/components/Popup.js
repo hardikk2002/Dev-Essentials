@@ -2,7 +2,7 @@ import React from "react";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import ChromeReaderModeIcon from "@material-ui/icons/ChromeReaderMode";
 import QueueIcon from "@material-ui/icons/Queue";
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import AcUnitIcon from "@material-ui/icons/AcUnit";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import SettingsIcon from "@material-ui/icons/Settings";
 import {
@@ -17,6 +17,7 @@ import {
 import Blogs from "./Blogs.js";
 import Todo from "./Todo.js";
 import Contest from "./Contest.js";
+import News from "./News.js";
 
 function Popup() {
   return (
@@ -63,21 +64,21 @@ function Popup() {
               </div>
             </div>
             <div style={styles.info}>
-              <h1 style={styles.title}>Coding Contests 🌈</h1>
+              <h1 style={styles.title}>Coding Contests 🧑‍💻</h1>
             </div>
           </Link>
-          <div style={styles.optionItem}>
+          <Link to="news" style={styles.optionItem}>
             <div style={styles.iconBackground}>
               <div style={{ ...styles.icon, ...styles.music }}>
-                <PlayCircleFilledIcon />
+                <AcUnitIcon />
               </div>
             </div>
             <div style={styles.info}>
-              <h1 style={styles.title}>Music & Chill 🎧</h1>
+              <h1 style={styles.title}>News Lab 🌈</h1>
             </div>
-          </div>
+          </Link>
         </div>
-        <div style={styles.footer}>
+        {/* <div style={styles.footer}>
           <h1>
             Login?{" "}
             <span style={{ cursor: "pointer" }}>
@@ -86,7 +87,7 @@ function Popup() {
               <SettingsIcon />
             </span>{" "}
           </h1>
-        </div>
+        </div> */}
         <Switch>
           <Route exact path="/popup">
             <Popup />
@@ -100,8 +101,8 @@ function Popup() {
           <Route exact path="/contest">
             <Contest />
           </Route>
-          <Route exact path="/">
-            <Redirect to="/options.html" />
+          <Route exact path="/news">
+            <News />
           </Route>
         </Switch>
       </div>
@@ -137,9 +138,9 @@ const styles = {
   optionItem: {
     background: "rgba(248,252,251,.582)",
     boxShadow: "2px 2px 1px #e0e6edcc",
-    width: "85%",
-    height: "50px",
-    padding: "2%",
+    width: "80%",
+    height: "auto",
+    padding: "3%",
     margin: "3% auto",
     borderRadius: "7px",
     display: "flex",

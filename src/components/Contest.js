@@ -29,7 +29,7 @@ const Contest = () => {
 
   return (
     <div style={styles.main}>
-      <h1 style={styles.headerTitle}>Coding Contests 🌈</h1>
+      <h1 style={styles.headerTitle}>Coding Contests 🧑‍💻</h1>
       <div style={styles.platformDiv}>
         <div
           style={styles.platformInnerDiv}
@@ -167,7 +167,6 @@ const styles = {
     maxWidth: "420px",
     height: "570px",
     background: "#f9fafc",
-    overflow: "auto",
     boxSizing: "border-box",
   },
   headerTitle: {
@@ -206,16 +205,17 @@ const styles = {
   listOuterContainer: {
     height: "68%",
     padding: "2% 3%",
-    overflow: "auto",
   },
   listContainer: {
     height: "72%",
     padding: "2% 3%",
+    overflow: "auto",
     textDecoration: "underline 2px rgba(248,252,251,.582)",
   },
   postsContainer: {
     height: "72%",
     padding: "2% 3%",
+    overflow: "auto",
     textDecoration: "underline 2px rgba(248,252,251,.582)",
   },
   postContent: {
@@ -223,7 +223,7 @@ const styles = {
     height: "auto",
     padding: "3%",
     background: "rgba(248,252,251,.582)",
-    boxShadow: "2px 2px 1px #e0e6edcc",
+    boxShadow: "2px 2px 1px #835CD2",
     borderRadius: "7px",
     display: "flex",
     alignItems: "center",

@@ -1,9 +1,9 @@
 const popup_entry_point = document.createElement("div");
 let reactJS_script = document.createElement("script");
 
-blogs_entry_point.id = "blogs";
-reactJS_script.src = "blogs.bundle.js";
+popup_entry_point.id = "popup";
+reactJS_script.src = "popup.bundle.js";
 
-blogs_entry_point.appendChild(reactJS_script);
+popup_entry_point.appendChild(reactJS_script);
 
-document.querySelector("body").appendChild(blogs_entry_point);
+document.querySelector("body").appendChild(popup_entry_point);
