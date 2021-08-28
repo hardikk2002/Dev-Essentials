@@ -78,7 +78,7 @@ function Popup() {
             </div>
           </Link>
         </div>
-        <div style={styles.footer}>
+        {/* <div style={styles.footer}>
           <h1>
             Login?{" "}
             <span style={{ cursor: "pointer" }}>
@@ -87,7 +87,7 @@ function Popup() {
               <SettingsIcon />
             </span>{" "}
           </h1>
-        </div>
+        </div> */}
         <Switch>
           <Route exact path="/popup">
             <Popup />
@@ -138,9 +138,9 @@ const styles = {
   optionItem: {
     background: "rgba(248,252,251,.582)",
     boxShadow: "2px 2px 1px #e0e6edcc",
-    width: "85%",
-    height: "50px",
-    padding: "2%",
+    width: "80%",
+    height: "auto",
+    padding: "3%",
     margin: "3% auto",
     borderRadius: "7px",
     display: "flex",

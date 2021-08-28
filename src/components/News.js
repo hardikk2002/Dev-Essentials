@@ -74,14 +74,18 @@ const News = () => {
         const apiResponse = await response.json();
         {
           apiResponse === "error"
-            ? setErrorHandle("Taking time to fetch, try later 🟠")
+            ? setErrorHandle(
+                "Taking time to fetch, try later or change your search key 🟠"
+              )
             : setNewsList(apiResponse);
         }
 
         // console.log(newsList);
         setLoading(false);
       } catch (error) {
-        console.log("error");
+        setErrorHandle(
+          "Taking time to fetch, try later or change your search key 🟠"
+        );
       }
     }
   }
@@ -321,5 +325,41 @@ const styles = {
     height: "72%",
     padding: "2% 3%",
     textDecoration: "underline 2px rgba(248,252,251,.582)",
+  },
+  postContent: {
+    width: "90%",
+    height: "auto",
+    padding: "3%",
+    background: "rgba(248,252,251,.582)",
+    boxShadow: "2px 2px 1px #e0e6edcc",
+    borderRadius: "7px",
+    display: "flex",
+    alignItems: "center",
+    margin: "1% auto",
+  },
+  postImage: {
+    width: "30%",
+    height: "70px",
+    margin: "auto 2% auto 2%",
+    borderRadius: "7px",
+    boxShadow: "2px 2px 5px #e0e6edcc",
+  },
+  postInfo: {
+    width: "70%",
+    marginLeft: "1%",
+    height: "auto",
+  },
+  postTitle: {
+    fontWeight: 500,
+    fontSize: 15,
+    color: "#252429",
+    fontFamily: "'Rubik', sans-serif",
+  },
+  postAuther: {
+    fontSize: 12,
+    textAlign: "right",
+    marginRight: "3%",
+    color: "#252429",
+    fontFamily: "'Rubik', sans-serif",
   },
 };

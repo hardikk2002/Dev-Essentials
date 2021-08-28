@@ -120,11 +120,8 @@ const styles = {
     borderRadius: "7px",
   },
   todoContainer: {
-    overflow: "auto",
-    height: "85%",
-    textAlign: "center",
-    margin: "5% 3%",
-    borderRadius: "7px",
+    height: "72%",
+    padding: "2% 3%",
   },
   taskInput: {
     height: "40px",

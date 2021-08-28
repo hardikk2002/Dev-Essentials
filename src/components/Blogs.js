@@ -319,7 +319,6 @@ const styles = {
   postOuterContainer: {
     height: "95%",
     padding: "2% 3%",
-    overflow: "auto",
   },
   postsContainer: {
     height: "72%",
@@ -331,7 +330,7 @@ const styles = {
     height: "auto",
     padding: "2%",
     background: "rgba(248,252,251,.582)",
-    boxShadow: "2px 2px 1px #e0e6edcc",
+    boxShadow: "2px 2px 1px #835CD2",
     borderRadius: "7px",
     display: "flex",
     alignItems: "center",
@@ -343,7 +342,7 @@ const styles = {
     height: "auto",
     margin: "1% auto",
     background: "rgba(248,252,251,.582)",
-    boxShadow: "2px 2px 1px #e0e6edcc",
+    boxShadow: "2px 2px 1px #835CD2",
     borderRadius: "7px",
   },
   postTitleGithub: {
