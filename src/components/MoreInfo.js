@@ -1,6 +1,7 @@
 import React from "react";
 
 const MoreInfo = () => {
+
   return (
     <div style={styles.main}>
       <h1 style={styles.headerTitle}>More about Us 🧑</h1>
@@ -16,7 +17,15 @@ const MoreInfo = () => {
         </p>
       </div>
       <div style={styles.communityButton}>
-        <div style={styles.moreInfoContainer}> Join our community 🖤 now</div>
+        <a
+          style={styles.moreInfoContainer}
+          href={chrome.extension.getURL("options.html")}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {" "}
+          Join our community 🖤 now
+        </a>
       </div>
       <div style={styles.upperHalf}>
         <p>and avail these benefits,</p>

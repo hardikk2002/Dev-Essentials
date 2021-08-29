@@ -10,6 +10,7 @@ module.exports = {
   },
   entry: {
     popup: path.resolve(__dirname, "./src/entry/index-popup.js"),
+    options: path.resolve(__dirname, "./src/entry/index-options.js"),
 
     // ONLY REQUIRED WHILE TESTING INDIVIDUAL PAGE ON LOCALHOST
 
@@ -54,6 +55,11 @@ module.exports = {
       filename: "popup.html",
       template: "src/html/popup.html",
       chunks: ["popup"],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "options.html",
+      template: "src/html/options.html",
+      chunks: ["options"],
     }),
 
     // ONLY REQUIRED WHILE TESTING INDIVIDUAL PAGE ON LOCALHOST
