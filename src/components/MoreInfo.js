@@ -1,7 +1,6 @@
 import React from "react";
 
 const MoreInfo = () => {
-
   return (
     <div style={styles.main}>
       <h1 style={styles.headerTitle}>More about Us 🧑</h1>
@@ -12,8 +11,8 @@ const MoreInfo = () => {
           there.
         </p> */}
         <p>
-          Dev Essentials keeps people updated with the latest happenings and
-          contests, so that no one missess the next opportunity. 🌈
+          I will keep you updated with the latest happenings, upcoming contests
+          and, new tech innovations.🌈
         </p>
       </div>
       <div style={styles.communityButton}>
@@ -23,8 +22,8 @@ const MoreInfo = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {" "}
-          Join our community 🖤 now
+          {/* {chrome.extension.getURL("options.html")} */} Join our community
+          🖤 now
         </a>
       </div>
       <div style={styles.upperHalf}>
@@ -115,16 +114,17 @@ const styles = {
     fontWeight: 500,
     textDecoration: "none",
     background: "#353535",
-    padding: "2.5%",
+    padding: "3%",
     color: "#f9fafc",
     margin: "auto 1%",
     borderRadius: "7px",
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: "'Rubik', sans-serif",
   },
   gitWebContainer: {
     textAlign: "center",
-    margin: "2% auto",
+    padding: "3%",
+    margin: "auto",
     lineHeight: "2.4rem",
     fontSize: 12,
   },
@@ -133,11 +133,11 @@ const styles = {
     fontWeight: 500,
     textDecoration: "none",
     border: "2px solid #353535",
-    padding: "2.2%",
+    padding: "2.5%",
     color: "#353535",
-    margin: "auto 1%",
+    margin: "1%",
     borderRadius: "7px",
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: "'Rubik', sans-serif",
   },
 };

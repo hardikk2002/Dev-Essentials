@@ -264,6 +264,7 @@ const styles = {
     height: "570px",
     background: "#f9fafc",
     boxSizing: "border-box",
+    overflow: "auto",
   },
 
   headerTitle: {
@@ -286,7 +287,7 @@ const styles = {
   },
   platformInnerDiv: {
     cursor: "pointer",
-    margin: "3%",
+    margin: "3% 3% 0 3%",
     width: "45px",
     height: "45px",
     background: "#ffff",
@@ -302,11 +303,11 @@ const styles = {
   },
   postOuterContainer: {
     height: "95%",
-    padding: "2% 3%",
+    padding: "0% 3% 2% 3%",
   },
   postsContainer: {
     height: "72%",
-    padding: "2% 3%",
+    padding: "0% 3% 2% 3%",
     textDecoration: "underline 2px rgba(248,252,251,.582)",
   },
   postContent: {
@@ -318,13 +319,13 @@ const styles = {
     borderRadius: "7px",
     display: "flex",
     alignItems: "center",
-    margin: "1% auto",
+    margin: "0% auto 2% auto",
   },
   postContentGithub: {
     width: "90%",
     padding: "2%",
     height: "auto",
-    margin: "1% auto",
+    margin: "0% auto 2% auto",
     background: "rgba(248,252,251,.582)",
     boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
