@@ -53,7 +53,7 @@ const MoreInfo = () => {
         </a>
         <a
           style={styles.moreInfoContainer}
-          href="https://github.com/hardikk2002/Dev-Essentials"
+          href=" https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fhardikk2002%2FDev-Essentials&via=%40hardikk2002&text=Check%20out%20Dev%20Essentials%2C%20It%20will%20keep%20you%20updated%20with%20the%20latest%20happenings%20and%20contests%2C%20so%20that%20you%20will%20never%20miss%20the%20opportunities.&hashtags=devcommunity%2C%20hashnode%2C%20productivity%2C%20opensource"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -117,6 +117,7 @@ const styles = {
     textAlign: "center",
     margin: "2% auto",
     lineHeight: "2.4rem",
+    fontSize: 12,
   },
   moreInfoContainer: {
     cursor: "pointer",

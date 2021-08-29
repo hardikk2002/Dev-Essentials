@@ -92,7 +92,7 @@ const News = () => {
 
   return (
     <div style={styles.main}>
-      <h1 style={styles.headerTitle}>News Lab 🌈</h1>
+      <h1 style={styles.headerTitle}>Tech Hunt 🌈</h1>
       <div style={styles.platformDiv}>
         <div style={styles.platformInnerDiv} onClick={listFetcherApple}>
           <img

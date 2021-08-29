@@ -67,7 +67,7 @@ function Popup() {
               </div>
             </div>
             <div style={styles.info}>
-              <h1 style={styles.title}>News Lab 🌈</h1>
+              <h1 style={styles.title}>Tech Hunt 🌈</h1>
             </div>
           </Link>
         </div>
