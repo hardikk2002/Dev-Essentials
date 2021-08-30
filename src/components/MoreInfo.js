@@ -18,7 +18,7 @@ const MoreInfo = () => {
       <div style={styles.communityButton}>
         <a
           style={styles.moreInfoContainer}
-          href={chrome.extension.getURL("options.html")}
+          href="localhost:8080/options.html"
           target="_blank"
           rel="noopener noreferrer"
         >
