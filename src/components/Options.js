@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { useAuth0 } from "@auth0/auth0-react";
-import ScrollToBottom from "react-scroll-to-bottom";
+// import ScrollToBottom from "react-scroll-to-bottom";
 
-const socket = io("http://localhost:4000");
+const socket = io("https://devessential.herokuapp.com/");
 
 const Options = () => {
   const [message, setMessage] = useState("");
@@ -12,6 +12,13 @@ const Options = () => {
   useEffect(() => {
     socket.on("message", (payload) => {
       setChat([...chat, payload]);
+    });
+    socket.on("DB-messages", (payload) => {
+      if (payload.length) {
+        payload.map((msg) => {
+          chat.push({ userName: msg.name, message: msg.message });
+        });
+      }
     });
   });
 
@@ -157,7 +164,7 @@ const Options = () => {
                     Send
                   </button>
                 </form>
-                <ScrollToBottom style={styles.chatContainer}>
+                <div style={styles.chatContainer}>
                   {chat.map((payload, index) => {
                     return (
                       <p key={index}>
@@ -181,7 +188,7 @@ const Options = () => {
                       </p>
                     );
                   })}
-                </ScrollToBottom>
+                </div>
               </div>
             </div>
           </div>
@@ -377,9 +384,10 @@ const styles = {
     border: "none",
   },
   chatContainer: {
-    height: "100%",
-    padding: "5% 0",
+    height: "300px",
+    width: "100%",
     overflow: "auto",
+    padding: "5% 0",
     flex: "auto",
   },
 };
