@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import io from "socket.io-client";
 import { useAuth0 } from "@auth0/auth0-react";
+// import ScrollToBottom from "react-scroll-to-bottom";
+
+const socket = io("https://devessential.herokuapp.com/");
 
 const Options = () => {
-  const { loginWithRedirect, logout, isAuthenticated, isLoading } = useAuth0();
-  {
-  }
+  const [message, setMessage] = useState("");
+  const [chat, setChat] = useState([]);
+
+  useEffect(() => {
+    socket.on("message", (payload) => {
+      setChat([...chat, payload]);
+    });
+    socket.on("DB-messages", (payload) => {
+      if (payload.length) {
+        payload.map((msg) => {
+          chat.push({ userName: msg.name, message: msg.message });
+        });
+      }
+    });
+  });
+
+  const { loginWithRedirect, logout, isAuthenticated, isLoading, user } =
+    useAuth0();
+
   if (isLoading) return <div>Hang on...</div>;
+
+  function sendMessage(e) {
+    const userName = user.name;
+    e.preventDefault();
+    socket.emit("message", { userName, message });
+    setMessage("");
+  }
+
   return (
     <>
       {isAuthenticated ? (
@@ -62,22 +90,106 @@ const Options = () => {
               />
             </div>
           </div>
-          <div style={styles.optionYoutube}>
-            <iframe
-              style={styles.videoPlayer}
-              width="700"
-              src="https://www.youtube.com/embed/3SBltSuSvwg"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            >
-              ?
-            </iframe>
-            <div style={styles.videoText}>
-              <h1>👆</h1>
-              <br />
-              <h1 style={{ fontSize: 34 }}>👈&nbsp;&nbsp; Sample Space 🌈👽</h1>
+          <div
+            style={{ background: "linear-gradient(to bottom, #ffff, #eee)" }}
+          >
+            <div style={styles.optionYoutube}>
+              <iframe
+                style={styles.videoPlayer}
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/bJpj4mb8Ydk"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              <div style={styles.videoText}>
+                <br />
+                <h1 style={{ fontSize: 34 }}>
+                  <span style={{ textDecoration: "underline wavy #f75858" }}>
+                    Sample Space
+                  </span>
+                  👽
+                </h1>
+
+                <p style={{ color: "black", margin: "7% auto" }}>
+                  Open Source ❤️ Chrome Extension Build for Developers by
+                  Developer. 💎
+                </p>
+
+                <a
+                  style={styles.readMoreButton}
+                  href="http://"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Check On Github >>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            style={{ background: "linear-gradient(to bottom, #eee, #ffff)" }}
+          >
+            <div style={styles.chatForum}>
+              <div style={styles.chatText}>
+                <p style={styles.headerTag}>Community Forums</p>
+                <h1 style={styles.headerText}>
+                  Discuss, Report Bugs and give your Feedback. 🎁
+                </h1>
+                <a
+                  style={styles.moreInfoContainer}
+                  href=" https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fhardikk2002%2FDev-Essentials&via=%40hardikk2002&text=Check%20out%20Dev%20Essentials%2C%20It%20will%20keep%20you%20updated%20with%20the%20latest%20happenings%20and%20contests%2C%20so%20that%20you%20will%20never%20miss%20the%20opportunities.&hashtags=devcommunity%2C%20hashnode%2C%20productivity%2C%20opensource"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  🐦 Share a word
+                </a>
+              </div>
+              <div style={styles.messageForm}>
+                <form onSubmit={sendMessage}>
+                  <input
+                    style={styles.messageInput}
+                    type="text"
+                    name="message"
+                    placeholder="Type message"
+                    value={message}
+                    onChange={(e) => {
+                      setMessage(e.target.value);
+                    }}
+                    required
+                  ></input>
+                  <button type="submit" style={styles.sendButton}>
+                    Send
+                  </button>
+                </form>
+                <div style={styles.chatContainer}>
+                  {chat.map((payload, index) => {
+                    return (
+                      <p key={index}>
+                        <span
+                          style={{
+                            fontFamily: "'Rubik', sans-serif",
+                            fontWeight: "500",
+                            fontSize: 12,
+                          }}
+                        >
+                          {payload.userName}:
+                        </span>{" "}
+                        <span
+                          style={{
+                            fontFamily: "'Rubik', sans-serif",
+                            fontWeight: "400",
+                          }}
+                        >
+                          {payload.message}
+                        </span>
+                      </p>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         </>
@@ -198,7 +310,6 @@ const styles = {
     width: "100%",
     height: "470px",
     margin: "5% auto 0 auto",
-    background: "linear-gradient(to bottom, #ffff, #f7f7f7)",
     maxWidth: "80%",
     display: "flex",
     justifyContent: "space-between",
@@ -210,10 +321,73 @@ const styles = {
     marginTop: "4%",
   },
   videoText: {
+    margin: "10% 0% 0 0",
     color: "#f75858",
-    margin: "10% 3% 0 0",
     textAlign: "center",
-    lineHeight: "0.5rem",
+    lineHeight: "2.1rem",
     fontFamily: "'Open Sans', sans-serif",
+  },
+  chatForum: {
+    maxWidth: "80%",
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "3%",
+    margin: "auto",
+  },
+
+  chatText: {
+    width: "40%",
+  },
+  messageForm: {
+    height: "400px",
+    width: "600px",
+    boxShadow: "5px 5px 5px #e0e6edcc",
+  },
+  moreInfoContainer: {
+    cursor: "pointer",
+    fontWeight: 500,
+    textDecoration: "none",
+    border: "2px solid #353535",
+    padding: "2.5%",
+    color: "#353535",
+    margin: "1%",
+    borderRadius: "7px",
+    fontSize: 16,
+    fontFamily: "'Rubik', sans-serif",
+  },
+  messageInput: {
+    height: "40px",
+    padding: "0 10px",
+    margin: "auto",
+    width: "80%",
+    outline: "none",
+    background: "#ffff",
+    color: "#252429",
+    fontWeight: 600,
+    fontFamily: "'Rubik', sans-serif",
+    border: "3px solid #e0e6edcc",
+    borderRadius: "20px",
+  },
+  sendButton: {
+    fontSize: 14,
+    fontWeight: 400,
+    padding: "3%",
+    margin: "0 1%",
+    padding: "11px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    outline: "none",
+    color: "#fcfaf8",
+    borderRadius: "20px",
+    boxShadow: "0px 2px 2px #e0e6edcc",
+    background: "#f75858",
+    border: "none",
+  },
+  chatContainer: {
+    height: "300px",
+    width: "100%",
+    overflow: "auto",
+    padding: "5% 0",
+    flex: "auto",
   },
 };

@@ -21,7 +21,9 @@ const News = () => {
     setTesla(false);
     setKeySearch(false);
     try {
-      const response = await fetch("http://localhost:5000/news-apple");
+      const response = await fetch(
+        "https://devessential.herokuapp.com/api/news-apple"
+      );
       const apiResponse = await response.json();
       {
         apiResponse === "error"
@@ -40,7 +42,9 @@ const News = () => {
     setTesla(true);
     setKeySearch(false);
     try {
-      const response = await fetch("http://localhost:5000/news-tesla");
+      const response = await fetch(
+        "https://devessential.herokuapp.com/api/news-tesla"
+      );
       const apiResponse = await response.json();
       {
         apiResponse === "error"
@@ -63,13 +67,16 @@ const News = () => {
     // var currentTime = new Date().toJSON().slice(0, 10);
     if (searchKey !== "") {
       try {
-        const response = await fetch("http://localhost:5000/news-keyword", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            resource: searchKey,
-          }),
-        });
+        const response = await fetch(
+          "https://devessential.herokuapp.com/api/news-keyword",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              resource: searchKey,
+            }),
+          }
+        );
 
         const apiResponse = await response.json();
         {

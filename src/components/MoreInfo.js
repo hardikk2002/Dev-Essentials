@@ -22,8 +22,7 @@ const MoreInfo = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {/* {chrome.extension.getURL("options.html")} */} Join our community
-          🖤 now
+          Join our community 🖤 now
         </a>
       </div>
       <div style={styles.upperHalf}>

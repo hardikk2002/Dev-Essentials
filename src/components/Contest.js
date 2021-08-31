@@ -13,11 +13,14 @@ const Contest = () => {
     setCurrentDate(currentTime);
 
     try {
-      const response = await fetch("http://localhost:5000/contest", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ resource: resource }),
-      });
+      const response = await fetch(
+        "https://devessential.herokuapp.com/api/contest",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ resource: resource }),
+        }
+      );
       const apiResponse = await response.json();
       setcontestList(apiResponse.objects);
 
