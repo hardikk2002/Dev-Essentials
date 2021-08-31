@@ -40,16 +40,6 @@ function Popup() {
             </div>
           </Link>
 
-          <div style={styles.optionItem}>
-            <div style={styles.iconBackground}>
-              <div style={{ ...styles.icon, ...styles.wod }}>
-                <QueueIcon />
-              </div>
-            </div>
-            <div style={styles.info}>
-              <h1 style={styles.title}> Word of the day! 😋</h1>
-            </div>
-          </div>
           <Link to="contest" style={styles.optionItem}>
             <div style={styles.iconBackground}>
               <div style={{ ...styles.icon, ...styles.news }}>
@@ -70,6 +60,16 @@ function Popup() {
               <h1 style={styles.title}>Tech Hunt 🌈</h1>
             </div>
           </Link>
+          <Link to="info" style={styles.optionItem}>
+            <div style={styles.iconBackground}>
+              <div style={{ ...styles.icon, ...styles.wod }}>
+                <QueueIcon />
+              </div>
+            </div>
+            <div style={styles.info}>
+              <h1 style={styles.title}> +1 more thing 😋</h1>
+            </div>
+          </Link>
         </div>
         <div style={styles.gitWebContainer}>
           <a
@@ -80,9 +80,9 @@ function Popup() {
           >
             ⭐ Star on Github
           </a>
-          <Link to="info" style={styles.moreInfoContainer}>
-            🖤 +1 more thing
-          </Link>
+          {/* <Link to="info" style={styles.moreInfoContainer}>
+            🖤
+          </Link> */}
         </div>
         <Switch>
           <Route exact path="/popup">

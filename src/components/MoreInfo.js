@@ -18,12 +18,11 @@ const MoreInfo = () => {
       <div style={styles.communityButton}>
         <a
           style={styles.moreInfoContainer}
-          href="localhost:8080/options.html"
+          href={chrome.extension.getURL("options.html")}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {/* {chrome.extension.getURL("options.html")} */} Join our community
-          🖤 now
+          Join our community 🖤 now
         </a>
       </div>
       <div style={styles.upperHalf}>
