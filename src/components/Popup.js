@@ -4,20 +4,13 @@ import ChromeReaderModeIcon from "@material-ui/icons/ChromeReaderMode";
 import QueueIcon from "@material-ui/icons/Queue";
 import AcUnitIcon from "@material-ui/icons/AcUnit";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
-import SettingsIcon from "@material-ui/icons/Settings";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-// import Blogs from "./blogs";
 import Blogs from "./Blogs.js";
 import Todo from "./Todo.js";
 import Contest from "./Contest.js";
 import News from "./News.js";
+import MoreInfo from "./MoreInfo.js";
 
 function Popup() {
   return (
@@ -74,20 +67,23 @@ function Popup() {
               </div>
             </div>
             <div style={styles.info}>
-              <h1 style={styles.title}>News Lab 🌈</h1>
+              <h1 style={styles.title}>Tech Hunt 🌈</h1>
             </div>
           </Link>
         </div>
-        {/* <div style={styles.footer}>
-          <h1>
-            Login?{" "}
-            <span style={{ cursor: "pointer" }}>
-              {" "}
-              🥳
-              <SettingsIcon />
-            </span>{" "}
-          </h1>
-        </div> */}
+        <div style={styles.gitWebContainer}>
+          <a
+            style={styles.gitContainer}
+            href="https://github.com/hardikk2002/Dev-Essentials"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ⭐ Star on Github
+          </a>
+          <Link to="info" style={styles.moreInfoContainer}>
+            🖤 +1 more thing
+          </Link>
+        </div>
         <Switch>
           <Route exact path="/popup">
             <Popup />
@@ -103,6 +99,9 @@ function Popup() {
           </Route>
           <Route exact path="/news">
             <News />
+          </Route>
+          <Route exact path="/info">
+            <MoreInfo />
           </Route>
         </Switch>
       </div>
@@ -122,7 +121,7 @@ const styles = {
     fontSize: 30,
     color: "#252429",
     fontWeight: 400,
-    margin: "5% auto",
+    margin: "5% auto 2% auto",
     padding: "1%",
     textAlign: "center",
     fontFamily: "'Open Sans', sans-serif",
@@ -146,7 +145,6 @@ const styles = {
     display: "flex",
     cursor: "pointer",
     textDecoration: "none",
-    ":hover": {},
   },
   iconBackground: {
     width: "20%",
@@ -186,12 +184,33 @@ const styles = {
     fontSize: 15,
     fontWeight: 400,
   },
-  footer: {
-    fontWeight: 300,
-    fontSize: 9,
-    fontFamily: "'Rubik', sans-serif",
+  gitWebContainer: {
+    padding: "3% 0%",
+    width: "85%",
+    margin: "2% auto 5% auto",
     textAlign: "center",
-    marginTop: "-3%",
+  },
+  gitContainer: {
+    fontWeight: 500,
+    textDecoration: "none",
+    background: "#353535",
+    padding: "3%",
+    color: "#f9fafc",
+    margin: "auto 1%",
+    borderRadius: "7px",
+    fontSize: 16,
+    fontFamily: "'Rubik', sans-serif",
+  },
+  moreInfoContainer: {
+    fontWeight: 500,
+    textDecoration: "none",
+    border: "2px solid #353535",
+    padding: "2.5%",
+    color: "#353535",
+    margin: "auto 1%",
+    borderRadius: "7px",
+    fontSize: 16,
+    fontFamily: "'Rubik', sans-serif",
   },
 };
 

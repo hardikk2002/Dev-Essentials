@@ -92,7 +92,7 @@ const News = () => {
 
   return (
     <div style={styles.main}>
-      <h1 style={styles.headerTitle}>News Lab 🌈</h1>
+      <h1 style={styles.headerTitle}>Tech Hunt 🌈</h1>
       <div style={styles.platformDiv}>
         <div style={styles.platformInnerDiv} onClick={listFetcherApple}>
           <img
@@ -134,7 +134,7 @@ const News = () => {
       <div style={styles.postsContainer}>
         {loading === true ? (
           <>
-            <div>
+            <div style={styles.prePostsContent}>
               <h2>Fetching best posts for you 🏄🏼‍♂️</h2>
             </div>
           </>
@@ -224,10 +224,21 @@ const News = () => {
                   })}
                 </div>
               </>
-            ) : { errorHandle } ? (
-              `${errorHandle}`
             ) : (
-              "Nothing"
+              <div style={styles.prePostsContent}>
+                {errorHandle && `${errorHandle}`}
+                <h4>Top 10 news on Apple...🤩</h4>
+                <h4>Recent 10 posts on Tesla...</h4>
+                <p>Enter keywords like,</p>
+                <li>Elon musk</li>
+                <li>Space</li>
+                <li>Crypto ...</li>
+                <p>
+                  and get 10 latest and most liked posts related to your
+                  keyword. 🎯🥳
+                </p>
+                <br />
+              </div>
             )}
           </>
         )}
@@ -356,6 +367,14 @@ const styles = {
     fontSize: 12,
     textAlign: "right",
     marginRight: "3%",
+    color: "#252429",
+    fontFamily: "'Rubik', sans-serif",
+  },
+  prePostsContent: {
+    margin: "auto",
+    width: "90%",
+    fontWeight: 500,
+    fontSize: 15,
     color: "#252429",
     fontFamily: "'Rubik', sans-serif",
   },

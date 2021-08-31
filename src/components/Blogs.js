@@ -116,7 +116,7 @@ function Blogs() {
       </div>
       <div style={styles.postsContainer}>
         {loading === true ? (
-          <div>
+          <div style={styles.prePostsContent}>
             <h2>Fetching Upcoming contests 🏄🏼‍♂️</h2>
           </div>
         ) : (
@@ -230,26 +230,22 @@ function Blogs() {
                         </div>
                       </>
                     ) : (
-                      <>
+                      <div style={styles.prePostsContent}>
                         <h3>Get top Posts from your Favourite ❤️ Platforms!</h3>
                         <br />
-
-                        <h3>
-                          <p>Hashnode: Top 10 blog.</p>
-                        </h3>
-
-                        <h3>
-                          <p>Devto: Blog Posts.</p>
-                        </h3>
-
-                        <h3>
-                          <p>Github: Top repositories.</p>
-                        </h3>
-
+                        <p>
+                          <strong>Hashnode:</strong> Top 10 blog.
+                        </p>
+                        <p>
+                          <strong>Devto:</strong> Blog Posts.
+                        </p>
+                        <p>
+                          <strong>Github:</strong> Top repositories.
+                        </p>
                         <br />
 
                         <p>Hashnode.com | Dev.to | Github.com</p>
-                      </>
+                      </div>
                     )}
                   </>
                 )}
@@ -268,6 +264,7 @@ const styles = {
     height: "570px",
     background: "#f9fafc",
     boxSizing: "border-box",
+    overflow: "auto",
   },
 
   headerTitle: {
@@ -290,7 +287,7 @@ const styles = {
   },
   platformInnerDiv: {
     cursor: "pointer",
-    margin: "3%",
+    margin: "3% 3% 0 3%",
     width: "45px",
     height: "45px",
     background: "#ffff",
@@ -306,11 +303,11 @@ const styles = {
   },
   postOuterContainer: {
     height: "95%",
-    padding: "2% 3%",
+    padding: "0% 3% 2% 3%",
   },
   postsContainer: {
     height: "72%",
-    padding: "2% 3%",
+    padding: "0% 3% 2% 3%",
     textDecoration: "underline 2px rgba(248,252,251,.582)",
   },
   postContent: {
@@ -318,19 +315,19 @@ const styles = {
     height: "auto",
     padding: "2%",
     background: "rgba(248,252,251,.582)",
-    boxShadow: "2px 2px 1px #835CD2",
+    boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
     display: "flex",
     alignItems: "center",
-    margin: "1% auto",
+    margin: "0% auto 2% auto",
   },
   postContentGithub: {
     width: "90%",
     padding: "2%",
     height: "auto",
-    margin: "1% auto",
+    margin: "0% auto 2% auto",
     background: "rgba(248,252,251,.582)",
-    boxShadow: "2px 2px 1px #835CD2",
+    boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
   },
   postTitleGithub: {
@@ -365,6 +362,14 @@ const styles = {
     fontSize: 12,
     textAlign: "right",
     marginRight: "3%",
+    color: "#252429",
+    fontFamily: "'Rubik', sans-serif",
+  },
+  prePostsContent: {
+    margin: "auto",
+    width: "90%",
+    fontWeight: 500,
+    fontSize: 15,
     color: "#252429",
     fontFamily: "'Rubik', sans-serif",
   },

@@ -8,17 +8,17 @@ module.exports = {
     contentBase: path.resolve(__dirname, "./src"),
     historyApiFallback: true,
   },
-  performance: {
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
-    hints: false,
-  },
   entry: {
     popup: path.resolve(__dirname, "./src/entry/index-popup.js"),
+    options: path.resolve(__dirname, "./src/entry/index-options.js"),
+
+    // ONLY REQUIRED WHILE TESTING INDIVIDUAL PAGE ON LOCALHOST
+
     // news: path.resolve(__dirname, "./src/entry/index-news.js"),
     // blogs: path.resolve(__dirname, "./src/entry/index-blogs.js"),
     // todo: path.resolve(__dirname, "./src/entry/index-todo.js"),
     // contest: path.resolve(__dirname, "./src/entry/index-contest.js"),
+    // info: path.resolve(__dirname, "./src/entry/index-info.js"),
   },
   output: {
     filename: "[name].bundle.js",
@@ -56,6 +56,19 @@ module.exports = {
       template: "src/html/popup.html",
       chunks: ["popup"],
     }),
+    new HtmlWebpackPlugin({
+      filename: "options.html",
+      template: "src/html/options.html",
+      chunks: ["options"],
+    }),
+
+    // ONLY REQUIRED WHILE TESTING INDIVIDUAL PAGE ON LOCALHOST
+
+    // new HtmlWebpackPlugin({
+    //   filename: "info.html",
+    //   template: "src/html/info.html",
+    //   chunks: ["info"],
+    // }),
     // new HtmlWebpackPlugin({
     //   filename: "news.html",
     //   template: "src/html/news.html",
