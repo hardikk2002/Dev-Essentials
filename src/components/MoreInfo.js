@@ -5,11 +5,6 @@ const MoreInfo = () => {
     <div style={styles.main}>
       <h1 style={styles.headerTitle}>More about Us 🧑</h1>
       <div style={styles.upperHalf}>
-        {/* <p>
-          This is an productivity tool, build and designed specificly for chrome
-          web store, to help whole Dev Community and tech enthusiasts 🧑‍💻 out
-          there.
-        </p> */}
         <p>
           I will keep you updated with the latest happenings, upcoming contests
           and, new tech innovations.🌈
@@ -18,7 +13,7 @@ const MoreInfo = () => {
       <div style={styles.communityButton}>
         <a
           style={styles.moreInfoContainer}
-          href={chrome.extension.getURL("options.html")}
+          href={chrome.runtime.getURL("options.html")}
           target="_blank"
           rel="noopener noreferrer"
         >

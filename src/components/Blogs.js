@@ -1,5 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "regenerator-runtime/runtime.js";
+
+const StoryCard = ({ id }) => {
+  const [details, setDetails] = useState({});
+
+  const getStoryData = async (id) => {
+    const response = await fetch(
+      `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`,
+      {
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
+
+    const storyDetails = await response.json();
+    console.log(storyDetails);
+    setDetails(storyDetails);
+  };
+
+  useEffect(() => {
+    getStoryData(id);
+  }, [id]);
+
+  return (
+    <div key={details.id} style={styles.postContentGithub}>
+      <a
+        style={styles.postsContainer}
+        href={details.url}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <h2 style={styles.postInfoGithub}>{details.title}</h2>
+      </a>
+    </div>
+  );
+};
 
 const query = `{
     storiesFeed(type:BEST)
@@ -24,10 +60,12 @@ function Blogs() {
   const [hashnode, setHashnode] = useState(false);
   const [devto, setDevto] = useState(false);
   const [github, setGithub] = useState(false);
+  const [hackerNews, setHackerNews] = useState(false);
 
   const [hashnodePosts, setHashnodePosts] = useState([]);
   const [devtoPosts, setDevtoPosts] = useState([]);
   const [githubRepo, setGithubRepo] = useState([]);
+  const [hackerPosts, setHackerPosts] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
@@ -36,6 +74,7 @@ function Blogs() {
     setHashnode(true);
     setDevto(false);
     setGithub(false);
+    setHackerNews(false);
     try {
       const response = await fetch("https://api.hashnode.com", {
         method: "POST",
@@ -57,6 +96,7 @@ function Blogs() {
     setHashnode(false);
     setDevto(true);
     setGithub(false);
+    setHackerNews(false);
     try {
       const response = await fetch("https://dev.to/api/articles", {
         headers: {
@@ -76,6 +116,7 @@ function Blogs() {
     setHashnode(false);
     setDevto(false);
     setGithub(true);
+    setHackerNews(false);
     try {
       const response = await fetch(
         "https://gtrend.yapie.me/repositories?since=daily"
@@ -83,6 +124,31 @@ function Blogs() {
       const trendingRepos = await response.json();
       setLoading(false);
       setGithubRepo(trendingRepos);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function hackerNewsFetcher() {
+    setLoading(true);
+    setHashnode(false);
+    setDevto(false);
+    setGithub(false);
+    setHackerNews(true);
+
+    try {
+      const response = await fetch(
+        "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      const apiResponse = await response.json();
+      console.log(apiResponse);
+      setLoading(false);
+      setHackerPosts(apiResponse);
     } catch (error) {
       console.log(error);
     }
@@ -113,11 +179,18 @@ function Blogs() {
             alt="https://github.com/"
           />
         </div>
+        <div style={styles.platformInnerDiv} onClick={hackerNewsFetcher}>
+          <img
+            style={styles.platformLogo}
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Y_Combinator_logo.svg/220px-Y_Combinator_logo.svg.png"
+            alt="https://news.ycombinator.com/"
+          />
+        </div>
       </div>
       <div style={styles.postsContainer}>
         {loading === true ? (
           <div style={styles.prePostsContent}>
-            <h2>Fetching Upcoming contests 🏄🏼‍♂️</h2>
+            <h2>Fetching latest Posts 🏄🏼‍♂️</h2>
           </div>
         ) : (
           <>
@@ -230,22 +303,44 @@ function Blogs() {
                         </div>
                       </>
                     ) : (
-                      <div style={styles.prePostsContent}>
-                        <h3>Get top Posts from your Favourite ❤️ Platforms!</h3>
-                        <br />
-                        <p>
-                          <strong>Hashnode:</strong> Top 10 blog.
-                        </p>
-                        <p>
-                          <strong>Devto:</strong> Blog Posts.
-                        </p>
-                        <p>
-                          <strong>Github:</strong> Top repositories.
-                        </p>
-                        <br />
-
-                        <p>Hashnode.com | Dev.to | Github.com</p>
-                      </div>
+                      <>
+                        {hackerNews ? (
+                          <>
+                            <div style={styles.postOuterContainer}>
+                              {hackerPosts.slice(0, 15).map((storyId) => {
+                                return <StoryCard id={storyId} />;
+                              })}
+                            </div>
+                          </>
+                        ) : (
+                          <div style={styles.prePostsContent}>
+                            <h3>
+                              <center>
+                                Get top Posts from your Favourite ❤️ Platforms!
+                              </center>
+                            </h3>
+                            <br />
+                            <p>
+                              <strong>Hashnode:</strong> Top 10 blog.
+                            </p>
+                            <p>
+                              <strong>Devto:</strong> Blog Posts.
+                            </p>
+                            <p>
+                              <strong>Github:</strong> Top repositories.
+                            </p>
+                            <p>
+                              <strong>Hacker News:</strong> Latest Stories.
+                            </p>
+                            <br />
+                            <br />
+                            <center>
+                              Hashnode.com | Dev.to | Github.com |
+                              Thehackernews.com
+                            </center>
+                          </div>
+                        )}
+                      </>
                     )}
                   </>
                 )}
@@ -264,7 +359,6 @@ const styles = {
     height: "570px",
     background: "#f9fafc",
     boxSizing: "border-box",
-    overflow: "auto",
   },
 
   headerTitle: {
@@ -329,6 +423,7 @@ const styles = {
     background: "rgba(248,252,251,.582)",
     boxShadow: "2px 2px 1px #e0e6edcc",
     borderRadius: "7px",
+    testDecoration: "none",
   },
   postTitleGithub: {
     color: "#252429",

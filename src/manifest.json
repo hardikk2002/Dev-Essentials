@@ -1,17 +1,17 @@
 {
   "name": "Dev Essentials",
-  "description": "Productivity tool for developers",
+  "description": "I will keep you updated with the latest happenings, upcoming contests and, new tech innovations.",
   "version": "1.0.0",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "icons": {
-    "16": "./obj-16x16.png",
-    "32": "./obj-32x32.png",
-    "48": "./obj-48x48.png",
-    "128": "./obj-128x128.png"
+    "128": "./128x128.png",
+    "16": "./16x16.png",
+    "32": "./32x32.png",
+    "48": "./48x48.png"
   },
   "options_page": "./options.html",
-  "browser_action": {
-    "default_popup": "popup.html"
-  },
-  "permissions": ["tabs", "<all_urls>"]
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "48x48.png"
+  }
 }

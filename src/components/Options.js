@@ -69,7 +69,7 @@ const Options = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Read more >>
+                  Read more
                 </a>
               </div>
 
@@ -124,7 +124,7 @@ const Options = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Check On Github >>
+                  Check On Github
                 </a>
               </div>
             </div>

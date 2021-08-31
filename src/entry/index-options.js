@@ -8,7 +8,7 @@ render(
   <Auth0Provider
     domain="dev-essentials.us.auth0.com"
     clientId="cpdKLT0mnEQtlF7Lyj5a3L96vamSIk5W"
-    redirectUri="http://localhost:8080/options.html"
+    redirectUri="chrome-extension://jnfgkllihlmbgdhlijoiocoigdpjnbfd/options.html"
   >
     {/* window.location.origin */}
     <Options />
