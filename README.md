@@ -33,7 +33,7 @@ Here're some of our best features of Dev Essentials.
 - 🚀 **Give Feedback, Suggestion and chat with other community members.**
 - ⤵️ **Get update announcement before anyonelse.**
 
-### Installation Requirements: 
+### 📝 Installation Requirements: 
 - Install git (https://git-scm.com/download/win)
 - Install Nodejs (https://nodejs.org/en/download/)
 - Install MongoDB (https://docs.mongodb.com/manual/installation/)
@@ -69,14 +69,14 @@ npm run build
 
 You are all set! Open [localhost:8080/popup.html](http://localhost:8080/popup.html) to see the popup screen.
 
-## 🛠️ Load Extension to Chrome
+## 🎉 Load Extension to Chrome
 
 1. Build in Production 
 
 ```bash
 npm run build:prod
 ```
-2. Go to [Chrome Store](chrome://extensions/). 
+2. Go to [chrome://extensions/](chrome://extensions/) in your browser.
 
 3. Toggle Developer Mode, from top Right.
 
@@ -93,14 +93,14 @@ Wohoo 🥳, we you have made our own Chrome Extention.
 - Please read [`CONTRIBUTING`](CONTRIBUTING.md) for details on our [`CODE OF CONDUCT`](CODE_OF_CONDUCT.md), and the process for submitting pull requests to us.
 ## 💻 Built with
 
-- [React JS](https://reactjs.org/)
-- [Auth0](https://auth0.com/): Complete User Authentication
-- [socket.io](https://socket.io/): for real-time, bidirectional 
-- [Babel](https://babeljs.io/): for compiling JavaScript
+- [React JS](https://reactjs.org/): To make better file structure.
+- [Auth0](https://auth0.com/): Complete User Authentication.
+- [socket.io](https://socket.io/): for real-time, bidirectional communication.
+- [Babel](https://babeljs.io/): for compiling JavaScript for Browser.
 - [Webpack](https://webpack.js.org/): to bundle JavaScript files for usage in a browser
-- API: For fetching posts.
-- [manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/): to setup rules for chrome extension
-- [Material UI Icons](http://material-ui.com/): for using Icons
+- API:to fetch posts and other Details.
+- [manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/): to setup rules for chrome extension.
+- [Material UI Icons](http://material-ui.com/): for using Icons.
 
 - Also checkout [Dev Essentials Server Repository](https://github.com/hardikk2002/Dev-Essential-Server).
 
@@ -110,7 +110,7 @@ This project is licensed under the MIT License - see the [`LICENSE`](LICENSE) fi
 
 ## 🙏 Support
 
-If you found the app helpful, Don't forget to leave a star ⭐️
+### If you found the app helpful ❤️, Don't forget to leave a star ⭐️
 
 ## 🦄 Spread the word
 
