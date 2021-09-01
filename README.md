@@ -3,9 +3,12 @@
 
 [![Open Issues](https://img.shields.io/github/issues/hardikk2002/Dev-Essentials?style=for-the-badge&logo=github)](https://github.com/hardikk2002/Dev-Essentials/issues) [![Forks](https://img.shields.io/github/forks/hardikk2002/Dev-Essentials?style=for-the-badge&logo=github)](https://github.com/hardikk2002/Dev-Essentials/network/members) [![Stars](https://img.shields.io/github/stars/hardikk2002/Dev-Essentials?style=for-the-badge&logo=reverbnation)](https://github.com/code-monk08/connect-four/stargazers) ![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%99%A5-red?style=for-the-badge&logo=open-source-initiative)
 </div>
+<div align=center >
+<img width="180px" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1630461387242/dW781sn37.png" />
+</div>
 
 <h1 align="center">Dev Essentials ✨️</h1>
-<p align="center"> A Chrome Extention to keep you updated with the latest happenings✨️ </P>
+<p align="center"> A Chrome Extension to keep you updated with the latest happenings✨️ </P>
 
 ![12.jpg](https://cdn.hashnode.com/res/hashnode/image/upload/v1630443229855/U0uZjg--0.jpeg)
 ## 🔰 An Insight
