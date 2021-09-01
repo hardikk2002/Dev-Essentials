@@ -14,6 +14,8 @@
 ## 🔰 An Insight
 **Dev Essentials** is a Chrome Extension built for Developers and Tech Enthusiasts, to keep them updated with the latest happenings, upcoming contests and, new tech innovations. 
 
+### For more chech out this [article on DevEssentials](https://hardikk2002.hashnode.dev/dev-essentials-a-chrome-extension-to-keep-you-updated-with-the-latest-happenings)
+
 ## 🧐 Features
 
 Here're some of our best features of Dev Essentials.
